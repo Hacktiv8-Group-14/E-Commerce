@@ -50,5 +50,5 @@ const productSlice = createSlice({
         })
     }
 })
-export const { soldProduct, addStockBy1, minStockBy1, changeStock } = productSlice.actions
+// export const {  } = productSlice.actions
 export default productSlice.reducer
