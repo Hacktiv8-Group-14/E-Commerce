@@ -1,13 +1,15 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Homepage from './pages/Homepages';
-import Navbar from './components/molecules/Navbar';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "./components/molecules/Navbar";
+import { routes } from "./Routing";
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar/>
+      <Navbar />
       <Routes>
-          <Route path='/' element={<Homepage/>}></Route>
+        {routes?.map((item) => {
+          <Route path={item.path} element={<item.element />}></Route>;
+        })}
       </Routes>
     </BrowserRouter>
   );
