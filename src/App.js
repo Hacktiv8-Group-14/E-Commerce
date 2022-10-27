@@ -7,9 +7,9 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        {routes?.map((item) => {
-          <Route path={item.path} element={<item.element />}></Route>;
-        })}
+        {routes?.map(item => (
+          <Route path={item.path} element={<item.element />} />
+        ))}
       </Routes>
     </BrowserRouter>
   );
