@@ -1,9 +1,9 @@
 import {configureStore} from '@reduxjs/toolkit'
 import logger from 'redux-logger'
-import productReducer from './features/ProductSlice'
+import productReducer from './features/productSlice'
 export const store = configureStore({
     reducer: {
-        products: productReducer,
+        products: productReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 })
