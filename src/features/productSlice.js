@@ -6,7 +6,7 @@ const initialState = {
     isSuccess: false,
     errorMessage: '',
     products: [],
-    categories: ["all category"]
+    categories: []
 }
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
@@ -41,8 +41,8 @@ const productSlice = createSlice({
                 i.stock = 20
                 i.productSold = 0
             })
-            state.products = [...products]
-            state.categories = [...state.categories, ...categories]
+            state.products = products
+            state.categories = ["all category", ...categories]
             state.isSuccess = true
             state.isPending = false
             state.loading = false
