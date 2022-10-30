@@ -11,7 +11,7 @@ export const routes = [
     element: Homepage,
   },
   {
-    path: "/Detail/:id/:title",
+    path: "/Detail/:id",
     element: DetailPage,
   },
   {

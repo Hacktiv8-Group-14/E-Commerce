@@ -22,7 +22,17 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async ()
 const productSlice = createSlice({
     name: 'products',
     initialState,
-    reducers: {},
+    reducers: {
+        // action.payload = {id product, total item di cart}
+        soldProduct: (state, action) => {
+            state.products.forEach((product) => {
+                if(product.id === action.payload.id){
+                    product.productSold += action.payload.total
+                    product.stock -= action.payload.total
+                }
+            })
+        },
+    },
     extraReducers(builder){
         builder
         .addCase(fetchProducts.pending, (state) => {
@@ -50,5 +60,5 @@ const productSlice = createSlice({
         })
     }
 })
-// export const {  } = productSlice.actions
+export const { soldProduct } = productSlice.actions
 export default productSlice.reducer

@@ -34,14 +34,7 @@ export default function Homepage() {
         {filteredProducts?.map((product) => (
           <ProductCard
             key={product.id}
-            image={product.image}
-            category={product.category}
-            title={product.title}
-            price={product.price}
-            rating={product.rating.rate}
-            id={product.id}
-            productSold={product.productSold}
-            stock={product.stock}
+            product={product}
           />
         ))}
       </CardContainer>

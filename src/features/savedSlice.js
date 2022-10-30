@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 let dataStorage = localStorage.getItem("savedProducts");
 
 const initialState = {
+  // savedProducts = array isinya id product
   savedProducts: JSON.parse(dataStorage) || [],
 };
 
@@ -10,6 +11,7 @@ const savedSlice = createSlice({
   name: "saved",
   initialState,
   reducers: {
+    //action.payload = id product
     addSavedProducts: (state, action) => {
       state.savedProducts = [...state.savedProducts, action.payload];
       localStorage.setItem(
@@ -19,7 +21,7 @@ const savedSlice = createSlice({
     },
     deleteSavedProducts: (state, action) => {
       const filter = state.savedProducts.filter(
-        (item) => item.title !== action.payload.title
+        (id) => id !== action.payload
       );
       state.savedProducts = [...filter];
       localStorage.setItem("SavedProducts", JSON.stringify(filter));

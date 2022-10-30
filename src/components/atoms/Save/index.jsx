@@ -9,21 +9,21 @@ import {
 import { useEffect } from "react";
 
 export default function Save(props) {
-  const { product, title } = props;
+  const { product } = props;
   const dispatch = useDispatch();
   const savedProduct = useSelector((state) => state.saved.savedProducts);
   const [save, setSave] = useState(false);
 
   useEffect(() => {
-    savedProduct.some((e) => e.title === title) && setSave(true);
+    savedProduct.find((id) => id === product?.id) && setSave(true);
   }, [save]);
 
   const Saved = () => {
     if (save === false) {
-      dispatch(addSavedProducts(product));
+      dispatch(addSavedProducts(product?.id));
       setSave(!save);
     } else if (save === true) {
-      dispatch(deleteSavedProducts(product));
+      dispatch(deleteSavedProducts(product?.id));
       setSave(false);
     }
   };
