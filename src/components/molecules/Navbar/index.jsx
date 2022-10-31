@@ -37,7 +37,7 @@ function Navbar() {
           Save
         </Link>
         <Link
-          to="/"
+          to="/Cart"
           className="mx-0 sm:mx-16 my-3 sm:my-0 hover:text-[#F64C72] transition"
           onClick={() => setIsNavExpanded(false)}
         >
