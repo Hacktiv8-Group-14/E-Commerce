@@ -51,8 +51,14 @@ export default function DetailPage() {
                   <div>{`(${product?.rating.count} ulasan)`}</div>
                 </div>
               </div>
-              <div className="block my-4 font-medium text-black  text-3xl">
+              <div className=" my-4 font-medium text-[#242582] text-3xl flex items-center">
                 $ {product?.price}
+                <div className="mx-2 text-lg text-[#a32929] bg-[#ff9999] rounded-lg px-2 ">
+                  50%
+                </div>
+                <div className="line-through text-slate-400 text-xl ">
+                  ${product?.price * 2}
+                </div>
               </div>
 
               <div>
@@ -117,7 +123,7 @@ export default function DetailPage() {
             </div>
           </div>
         </div>
-        <Recomendation />
+        <Recomendation category={product.category} />
       </PageContainer>
     </>
   );
