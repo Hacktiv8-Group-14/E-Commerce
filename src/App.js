@@ -4,6 +4,7 @@ import { routes } from "./Routing";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "./features/productSlice";
+import ScrollToTop from "./components/atoms/ScrollToTop";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Navbar />
       <Routes>
         {routes?.map((item, index) => (
