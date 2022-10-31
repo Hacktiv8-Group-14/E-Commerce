@@ -11,7 +11,7 @@ export default function Login() {
 
   const handleOnChange = (e) => {
     const name = e.target.name;
-    if (name === "email") {
+    if (name === "username") {
       setUser({ ...user, email: e.target.value });
     } else if (name === "password") {
       setUser({ ...user, password: e.target.value });
@@ -52,14 +52,14 @@ export default function Login() {
           <div className="w-full max-w-md border p-4">
             <div className="text-center">Login</div>
             <form>
-              <div>Email</div>
+              <div>Username</div>
               <Input
-                name="email"
+                name="username"
                 type="text"
                 placeholder="input here"
                 className="border border-black w-full"
                 onChange={handleOnChange}
-                value={user.email}
+                value={user.username}
               />
 
               <div>Password</div>
