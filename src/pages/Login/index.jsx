@@ -3,23 +3,26 @@ import { useNavigate } from "react-router-dom";
 import Buttton from "../../components/atoms/Buttons";
 import Input from "../../components/atoms/Input";
 import PageContainer from "../../components/container/PageContainer";
-import { admin, User } from "../../features/helpers";
 import axios from "axios";
+import { useDispatch } from "react-redux"
+import { setUser, setAdmin } from "../../features/loginSlice";
 export default function Login() {
-  const [user, setUser] = useState({ name: "", password: "" });
+  const [userValue, setUserValue] = useState({ name: "", password: "" });
+
+  const dispatch = useDispatch()
   const navigate = useNavigate();
 
   const handleOnChange = (e) => {
     const name = e.target.name;
     if (name === "username") {
-      setUser({ ...user, email: e.target.value });
+      setUserValue({ ...userValue, email: e.target.value });
     } else if (name === "password") {
-      setUser({ ...user, password: e.target.value });
+      setUserValue({ ...userValue, password: e.target.value });
     }
   };
 
   const isAdmin = () => {
-    admin("isAdmin");
+    dispatch(setAdmin())
     navigate("/admin");
   };
 
@@ -30,17 +33,17 @@ export default function Login() {
         password: password,
       })
       .then((response) => {
-        User(response.data.token);
+        dispatch(setUser(response.data.token))
         navigate("/");
       });
   };
 
   const login = (e) => {
-    if (user.email === "admin@bukapedia.com" && user.password === "admin123") {
+    if (userValue.email === "admin@bukapedia.com" && userValue.password === "admin123") {
       isAdmin();
       e.preventDefault();
     } else {
-      isUser(user.email, user.password);
+      isUser(userValue.email, userValue.password);
       e.preventDefault();
     }
   };
@@ -59,7 +62,7 @@ export default function Login() {
                 placeholder="input here"
                 className="border border-black w-full"
                 onChange={handleOnChange}
-                value={user.username}
+                value={userValue.username}
               />
 
               <div>Password</div>
@@ -69,7 +72,7 @@ export default function Login() {
                 placeholder="input here"
                 className="border border-black w-full"
                 onChange={handleOnChange}
-                value={user.password}
+                value={userValue.password}
               />
               <Buttton
                 className="bg-[#242582] w-full text-white p-2 mt-4"

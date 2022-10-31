@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import Logo from "../../atoms/Logo";
 import Buttton from "../../atoms/Buttons";
-import { getUser, remove } from "../../../features/helpers";
+import { useSelector, useDispatch } from "react-redux";
+import { removeLogin } from "../../../features/loginSlice";
 
 function Navbar() {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
+
+  const dispatch = useDispatch()
+
+  const user = useSelector(state => state.login.user)
 
   return (
     <nav className="w-full font-bold text-white bg-[#242582] p-2 sm:p-4 flex justify-between flex-col sm:flex-row fixed z-10 top-0">
@@ -47,10 +52,10 @@ function Navbar() {
 
         {/* Admin Navlink */}
         {/* <Link to="/" onClick={() => setIsNavExpanded(false)}>Home</Link>
-                <Link to="/sales" className="mx-0 sm:mx-16 my-4 sm:my-0" onClick={() => setIsNavExpanded(false)}>Sales Recap</Link> */}
+        <Link to="/sales" className="mx-0 sm:mx-16 my-4 sm:my-0" onClick={() => setIsNavExpanded(false)}>Sales Recap</Link> */}
 
         {/* Login/Logout Button */}
-        {!getUser() ? (
+        {!user ? (
           <Link to="/login">
             <Buttton className="border-[#F64C72] hover:border-white border-2 rounded-lg px-5 py-1 text-base sm:text-lg text-[#F64C72] hover:text-white transition">
               Login
@@ -58,8 +63,9 @@ function Navbar() {
           </Link>
         ) : (
           <Buttton
+            className="border-[#F64C72] hover:border-white border-2 rounded-lg px-5 py-1 text-base sm:text-lg text-[#F64C72] hover:text-white transition"
             onClick={() => {
-              remove();
+              dispatch(removeLogin())
             }}
           >
             Logout
