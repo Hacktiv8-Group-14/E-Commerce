@@ -7,13 +7,13 @@ import {
   deleteSavedProducts,
 } from "../../../features/savedSlice";
 import { useEffect } from "react";
-import { getUser } from "../../../features/helpers";
 import { useNavigate } from "react-router-dom";
 
 export default function Save(props) {
   const { product } = props;
   const dispatch = useDispatch();
   const savedProduct = useSelector((state) => state.saved.savedProducts);
+  const user = useSelector(state => state.login.user)
   const [save, setSave] = useState(false);
 
   useEffect(() => {
@@ -36,12 +36,10 @@ export default function Save(props) {
     <>
       <Button
         className="absolute top-0 right-0 p-3"
-        onClick={
-          getUser()
-            ? Saved
-            : () => {
-                navigate("/login");
-              }
+        onClick={user ? Saved : 
+          () => {
+            navigate("/Login");
+          }
         }
       >
         {save ? (
