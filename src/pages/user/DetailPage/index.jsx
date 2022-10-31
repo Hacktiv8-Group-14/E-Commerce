@@ -2,12 +2,13 @@ import { useParams } from "react-router-dom";
 import PageContainer from "../../../components/container/PageContainer";
 import { useSelector } from "react-redux";
 import Save from "../../../components/atoms/Save";
-import { AiFillStar, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { AiFillStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import Recomendation from "../../../components/molecules/Recomendation";
 import { useState } from "react";
 import Button from "../../../components/atoms/Buttons";
 import { useDispatch } from "react-redux";
 import { addCart, minCart } from "../../../features/cartSlice";
+import MinAddValue from "../../../components/atoms/MinAddValue";
 
 export default function DetailPage() {
   const { id } = useParams();

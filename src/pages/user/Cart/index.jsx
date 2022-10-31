@@ -9,6 +9,7 @@ import Button from "../../../components/atoms/Buttons";
 import { deleteItem } from "../../../features/cartSlice";
 import { soldProduct } from "../../../features/productSlice";
 import BottomBarContainer from "../../../components/container/BottomBarContainer";
+import Swal from "sweetalert2";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -19,6 +20,20 @@ export default function Cart() {
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [checkedItems, setCheckedItems] = useState([]);
+
+  const onClickCheckout = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Done Checkout!",
+      timer: 3000,
+      confirmButtonColor: "#242582",
+    });
+    checkedItems.forEach((item) => {
+      dispatch(soldProduct({ id: item.id, total: item.total }));
+      dispatch(deleteItem(item.id));
+    });
+    navigate("/");
+  };
 
   useEffect(() => {
     setCheckedItems(cart.filter((item) => item.isChecked));

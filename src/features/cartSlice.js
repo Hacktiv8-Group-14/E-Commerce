@@ -40,9 +40,17 @@ const cartSlice = createSlice({
         deleteItem: (state, action) => {
             const filterItems = state.items.filter((item) => item.id !== action.payload)
             state.items = [...filterItems]
+        },
+        // action.payload = {id: , total: }
+        changeItemTotalBy: (state, action) => {
+            state.items.forEach(item => {
+                if(item.id === action.payload.id){
+                    item.total = action.payload.total
+                }
+            })
         }
     }
 })
 
-export const { addCart, minCart, changeIsChecked, deleteItem } = cartSlice.actions
+export const { addCart, minCart, changeIsChecked, deleteItem, changeItemTotalBy } = cartSlice.actions
 export default cartSlice.reducer

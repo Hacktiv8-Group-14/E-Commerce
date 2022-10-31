@@ -7,9 +7,11 @@ import {
   minCart,
   changeIsChecked,
   deleteItem,
+  changeItemTotalBy,
 } from "../../../features/cartSlice";
 import Swal from "sweetalert2";
 import Quantity from "../../atoms/Quantity";
+import MinAddValue from "../../atoms/MinAddValue";
 
 export default function ProductRow({
   id,
