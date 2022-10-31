@@ -9,6 +9,7 @@ import Button from "../../../components/atoms/Buttons";
 import { deleteItem } from "../../../features/cartSlice";
 import { soldProduct } from "../../../features/productSlice";
 import BottomBarContainer from "../../../components/container/BottomBarContainer";
+import Swal from "sweetalert2"
 
 export default function Cart() {
 
@@ -20,6 +21,20 @@ export default function Cart() {
 
   const [totalPrice, setTotalPrice] = useState(0)
   const [checkedItems, setCheckedItems] = useState([])
+
+  const onClickCheckout = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Done Checkout!",
+      timer: 3000,
+      confirmButtonColor: "#242582"
+    })
+    checkedItems.forEach((item) =>{
+      dispatch(soldProduct({id: item.id, total: item.total}))
+      dispatch(deleteItem(item.id))
+    })
+    navigate('/')
+  }
 
   useEffect(() => {
     setCheckedItems(cart.filter((item) => item.isChecked))
@@ -59,17 +74,13 @@ export default function Cart() {
         {/* buat nampilin total harga yang dicheck sm tombol checkout */}
         <BottomBarContainer>
           <div className="flex justify-between sm:justify-between sm:gap-10 items-center">
-            <div className="text-base sm:text-xl">Total: <b>US$ {totalPrice}</b></div>
+            <div className="text-base sm:text-xl">
+              Total: <b>US$ {totalPrice}</b>
+            </div>
             <Button 
               disabled={checkedItems.length === 0 ? true : false} 
               className="font-bold text-sm sm:text-lg border-2 border-[#F64C72] hover:border-white disabled:border-[#F64C72]/50 p-2 rounded-lg text-[#F64C72] hover:text-white disabled:text-[#F64C72]/50 transition"
-              onClick={() => {
-                checkedItems.forEach((item) =>{
-                  dispatch(soldProduct({id: item.id, total: item.total}))
-                  dispatch(deleteItem(item.id))
-                  navigate('/')
-                })
-              }}
+              onClick={onClickCheckout}
             >
               Checkout
             </Button>

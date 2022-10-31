@@ -2,13 +2,15 @@ import { useParams } from "react-router-dom";
 import PageContainer from "../../../components/container/PageContainer";
 import { useSelector } from "react-redux";
 import Save from "../../../components/atoms/Save";
-import { AiFillStar, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
+import { BsFillTrashFill } from "react-icons/bs"
 import Checkout from "../../../components/molecules/CheckoutCard";
 import Recomendation from "../../../components/molecules/Recomendation";
 import { useState } from "react";
 import Button from "../../../components/atoms/Buttons";
 import { useDispatch } from "react-redux";
-import { addCart, minCart } from "../../../features/cartSlice"
+import { addCart, minCart, changeItemTotalBy, deleteItem } from "../../../features/cartSlice"
+import MinAddValue from "../../../components/atoms/MinAddValue";
 
 export default function DetailPage() {
   const { id } = useParams();
@@ -78,40 +80,42 @@ export default function DetailPage() {
                       )}
                     </div>
                   </div>
-                  <div className="w-full my-3">
-                    {cartItem?.total > 0 ? (
-                      // jika ada item di cart
-                      <div className="w-full sm:w-52 flex justify-between rounded-lg border-2">
+                  <div className="w-full sm:w-52 my-3">
+                    {cartItem ? (
+                      <div className="flex justify-start sm:justify-between w-full">
                         <Button 
-                            className="text-sm sm:text-xl hover:bg-[#242582] p-2 rounded-l-lg bg-[#242582] text-white"
-                            onClick={() => {
-                                dispatch(minCart(Number(id)))
-                            }}
-                        > 
-                            <AiOutlineMinus /> 
+                          className="text-base sm:text-xl hover:bg-[#242582] hover:text-white h-full rounded-full p-3 transition"
+                          onClick={() => dispatch(deleteItem(Number(id)))}
+                        >
+                          <BsFillTrashFill />
                         </Button>
-                        <span className="text-sm sm:text-xl text-center flex items-center justify-center w-10 sm:w-14 h-8 sm:h-10 px-2 sm:px-4">
-                            {cartItem?.total}
-                        </span>
-                        <Button 
-                            className="text-sm sm:text-xl hover:bg-[#242582] p-2 rounded-r-lg bg-[#242582] disabled:bg-[#242582]/50 text-white"
-                            onClick={() => {
-                                dispatch(addCart(Number(id)))
-                            }}
-                            disabled={cartItem?.total === product?.stock ? true : false}
-                        > 
-                            <AiOutlinePlus /> 
-                        </Button>
+                        <MinAddValue
+                          widthSm="185px"
+                          value={cartItem?.total}
+                          onChangeValue={(event) => dispatch(changeItemTotalBy({id: Number(id), total: Number(event.target.value)}))}
+                          minValue={1}
+                          maxValue={product?.stock}
+                          onClickMin={() => dispatch(minCart(Number(id)))}
+                          onClickPlus={() => dispatch(addCart(Number(id)))}
+                          onBlur={() => {
+                            if(cartItem?.total > product?.stock){
+                                dispatch(changeItemTotalBy({id: Number(id), total: product?.stock}))
+                            } else if(cartItem?.total < 1){
+                              dispatch(changeItemTotalBy({id: Number(id), total: 1}))
+                            }
+                          }}
+                        />
                       </div>
                     ) : (
                       // jika tidak ada item di cart
                       <Button
-                        className="bg-[#242582] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
+                        disabled={product?.stock === 0 ? true : false}
+                        className="bg-[#242582] disabled:bg-[#242582]/50 w-40 sm:w-52 text-white p-1.5 sm:p-2 rounded-lg "
                         onClick={() => {
                           dispatch(addCart(Number(id)))
                         }}
                       >
-                        Add to Cart
+                        {product?.stock === 0 ? 'Sold Out' : 'Add to Cart'}
                       </Button>
                     )}
                   </div>
