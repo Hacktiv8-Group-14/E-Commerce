@@ -16,7 +16,7 @@ export default function Recomendation(props) {
       (product) => product.category === category && product.id !== Number(id)
     );
     setFilter(filterByCategory);
-  }, []);
+  }, [id]);
 
   return (
     <>
