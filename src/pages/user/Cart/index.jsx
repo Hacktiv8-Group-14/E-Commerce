@@ -55,15 +55,6 @@ export default function Cart() {
 
   let product = {};
 
-  //tombol checkout
-  const Checkout = () => {
-    checkedItems.forEach((item) => {
-      dispatch(soldProduct({ id: item.id, total: item.total }));
-      dispatch(deleteItem(item.id));
-      navigate("/");
-    });
-  };
-
   return (
     <PageContainer>
       <Header>Cart</Header>
@@ -92,7 +83,7 @@ export default function Cart() {
             <Button
               disabled={checkedItems.length === 0 ? true : false}
               className="font-bold text-sm sm:text-lg border-2 border-[#F64C72] hover:border-white disabled:border-[#F64C72]/50 p-2 rounded-lg text-[#F64C72] hover:text-white disabled:text-[#F64C72]/50 transition"
-              onClick={Checkout}
+              onClick={onClickCheckout}
             >
               Checkout
             </Button>

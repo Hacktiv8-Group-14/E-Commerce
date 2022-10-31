@@ -17,7 +17,7 @@ export default function ProductCard(props) {
         ) : (
           <></>
         )}
-        <Link to={product.stock === 0 ? null : `/Detail/${product?.id}`}>
+        <Link to={`/Detail/${product?.id}`}>
           {/* Product Image */}
           <img
             src={product?.image}

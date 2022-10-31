@@ -2,13 +2,13 @@ import { useParams } from "react-router-dom";
 import PageContainer from "../../../components/container/PageContainer";
 import { useSelector } from "react-redux";
 import Save from "../../../components/atoms/Save";
-import { AiFillStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
 import Recomendation from "../../../components/molecules/Recomendation";
 import { useState } from "react";
 import Button from "../../../components/atoms/Buttons";
 import { useDispatch } from "react-redux";
 import { addCart, minCart } from "../../../features/cartSlice";
-import MinAddValue from "../../../components/atoms/MinAddValue";
+import Quantity from "../../../components/atoms/Quantity";
 
 export default function DetailPage() {
   const { id } = useParams();
@@ -80,43 +80,38 @@ export default function DetailPage() {
                   )}
                 </div>
               </div>
-              <div className="w-full my-3">
-                {cartItem?.total > 0 ? (
-                  // jika ada item di cart
-                  <div className="w-full sm:w-52 flex justify-between rounded-lg border-2">
-                    <Button
-                      className="text-sm sm:text-xl hover:bg-[#242582] p-2 rounded-l-lg bg-[#242582] text-white"
-                      onClick={() => {
-                        dispatch(minCart(Number(id)));
-                      }}
-                    >
-                      <AiOutlineMinus />
-                    </Button>
-                    <span className="text-sm sm:text-xl text-center flex items-center justify-center w-10 sm:w-14 h-8 sm:h-10 px-2 sm:px-4">
-                      {cartItem?.total}
-                    </span>
-                    <Button
-                      className="text-sm sm:text-xl hover:bg-[#242582] p-2 rounded-r-lg bg-[#242582] disabled:bg-[#242582]/50 text-white"
-                      onClick={() => {
-                        dispatch(addCart(Number(id)));
-                      }}
-                      disabled={
-                        cartItem?.total === product?.stock ? true : false
-                      }
-                    >
-                      <AiOutlinePlus />
-                    </Button>
-                  </div>
-                ) : (
-                  // jika tidak ada item di cart
+              <div className="my-3">
+                {product.stock === 0 ? (
                   <Button
-                    className="bg-[#242582] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
-                    onClick={() => {
-                      dispatch(addCart(Number(id)));
-                    }}
+                    className="bg-[#e73737] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
+                    disabled="true"
                   >
-                    Add to Cart
+                    Sold Out
                   </Button>
+                ) : (
+                  <div>
+                    {cartItem ? (
+                      <Quantity
+                        minClick={() => {
+                          dispatch(minCart(Number(id)));
+                        }}
+                        plusClick={() => {
+                          dispatch(addCart(Number(id)));
+                        }}
+                        quantity={cartItem?.total}
+                        stock={product.stock}
+                      />
+                    ) : (
+                      <Button
+                        className="bg-[#242582] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
+                        onClick={() => {
+                          dispatch(addCart(Number(id)));
+                        }}
+                      >
+                        Add Cart
+                      </Button>
+                    )}
+                  </div>
                 )}
               </div>
             </div>
