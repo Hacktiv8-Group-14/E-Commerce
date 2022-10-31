@@ -1,16 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/molecules/Navbar";
 import { routes } from "./Routing";
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux'
-import { fetchProducts } from './features/productSlice';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "./features/productSlice";
 
 function App() {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProducts())
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   return (

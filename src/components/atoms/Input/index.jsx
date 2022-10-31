@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 
 export default function Input(props) {
-  const { placeholder, onChange, type, className, value } = props;
+  const { placeholder, onChange, type, className, value, name } = props;
   return (
     <>
       <input
+        name={name}
         type={type}
         onChange={onChange}
         placeholder={placeholder}

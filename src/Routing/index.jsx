@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Payment from "../pages/user/Payment";
 import Cart from "../pages/user/Cart";
 import SavedPage from "../pages/user/SavedPage";
+import Admin from "../pages/admin";
 
 export const routes = [
   {
@@ -29,6 +30,10 @@ export const routes = [
   {
     path: "/Save",
     element: SavedPage,
+  },
+  {
+    path: "/admin",
+    element: Admin,
   },
 ];
 
