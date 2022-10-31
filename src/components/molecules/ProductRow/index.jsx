@@ -1,9 +1,9 @@
 import Button from "../../atoms/Buttons"
 import { BsFillTrashFill } from "react-icons/bs"
-import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom";
-import { addCart, minCart, changeIsChecked, deleteItem } from "../../../features/cartSlice"
+import { addCart, minCart, changeIsChecked, deleteItem, changeItemTotalBy } from "../../../features/cartSlice"
+import MinAddValue from "../../atoms/MinAddValue";
 
 export default function ProductRow({id, title, img, price, totalItem, stock, isChecked}) {
 
@@ -40,40 +40,31 @@ export default function ProductRow({id, title, img, price, totalItem, stock, isC
                     </div>
                 </Link>
             </div>
-            <div className="flex justify-end p-2 gap-8 sm:gap-10">
+            <div className="flex justify-end items-start p-2 gap-8 sm:gap-10 ">
                 {/* tombol hapus item dari cart */}
                 <Button 
-                    className="text-sm sm:text-xl hover:bg-[#242582] hover:text-white rounded-full p-2 transition"
+                    className="text-base sm:text-xl hover:bg-[#242582] hover:text-white rounded-full py-2 sm:py-3 transition"
                     onClick={() => dispatch(deleteItem(id))}
                 >
                     <BsFillTrashFill />
                 </Button>
-                <div className="w-24 sm:w-32 flex justify-between rounded-lg border-2">
-                    {/* tombol ngurangi 1 jumlah item */}
-                    <Button 
-                        className="text-sm sm:text-xl hover:bg-[#242582] p-2 rounded-l-lg bg-[#242582] disabled:bg-[#242582]/50 text-white"
-                        onClick={() => {
-                            dispatch(minCart(id))
-                        }}
-                        disabled={totalItem === 1 ? true : false}
-                    > 
-                        <AiOutlineMinus /> 
-                    </Button>
-                    <span className="text-sm sm:text-xl flex justify-center items-center w-10 sm:w-14 h-8 sm:h-10 px-2 sm:px-4">
-                        {totalItem}
-                    </span>
-                    {/* tombol nambah 1 jumlah item */}
-                    <Button 
-                        className="text-sm sm:text-xl hover:bg-[#242582] p-2 rounded-r-lg bg-[#242582] disabled:bg-[#242582]/50 text-white"
-                        onClick={() => {
-                            dispatch(addCart(id))
-                            
-                        }}
-                        disabled={totalItem === stock ? true : false}
-                    > 
-                        <AiOutlinePlus /> 
-                    </Button>
-                </div>
+                <MinAddValue
+                    width="128px"
+                    widthSm="96px"
+                    minValue={1}
+                    maxValue={stock}
+                    onClickMin={() => dispatch(minCart(id))}
+                    onClickPlus={() => dispatch(addCart(id))}
+                    value={totalItem}
+                    onChangeValue={(event) => dispatch(changeItemTotalBy({id: id, total: Number(event.target.value)}))}
+                    onBlur={() => {
+                        if(totalItem < 1){
+                            dispatch(changeItemTotalBy({id: id, total: 1}))
+                        } else if(totalItem > stock){
+                            dispatch(changeItemTotalBy({id: id, total: stock}))
+                        }
+                    }}
+                />
             </div>
         </div>
     )

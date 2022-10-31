@@ -23,7 +23,7 @@ const productSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
-        // action.payload = {id product, total item di cart}
+        // action.payload = {id: , total: (total item di cart)}
         soldProduct: (state, action) => {
             state.products.forEach((product) => {
                 if(product.id === action.payload.id){
