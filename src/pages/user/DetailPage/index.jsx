@@ -3,7 +3,6 @@ import PageContainer from "../../../components/container/PageContainer";
 import { useSelector } from "react-redux";
 import Save from "../../../components/atoms/Save";
 import { AiFillStar, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import Checkout from "../../../components/molecules/CheckoutCard";
 import Recomendation from "../../../components/molecules/Recomendation";
 import { useState } from "react";
 import Button from "../../../components/atoms/Buttons";

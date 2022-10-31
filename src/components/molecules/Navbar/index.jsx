@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import Logo from "../../atoms/Logo";
 import Buttton from "../../atoms/Buttons";
+import { getUser, remove } from "../../../features/helpers";
 
 function Navbar() {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -49,11 +50,21 @@ function Navbar() {
                 <Link to="/sales" className="mx-0 sm:mx-16 my-4 sm:my-0" onClick={() => setIsNavExpanded(false)}>Sales Recap</Link> */}
 
         {/* Login/Logout Button */}
-        <Link to="/login">
-          <Buttton className="border-[#F64C72] hover:border-white border-2 rounded-lg px-5 py-1 text-base sm:text-lg text-[#F64C72] hover:text-white transition">
-            Login
+        {!getUser() ? (
+          <Link to="/login">
+            <Buttton className="border-[#F64C72] hover:border-white border-2 rounded-lg px-5 py-1 text-base sm:text-lg text-[#F64C72] hover:text-white transition">
+              Login
+            </Buttton>
+          </Link>
+        ) : (
+          <Buttton
+            onClick={() => {
+              remove();
+            }}
+          >
+            Logout
           </Buttton>
-        </Link>
+        )}
       </div>
     </nav>
   );

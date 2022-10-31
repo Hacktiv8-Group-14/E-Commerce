@@ -5,22 +5,17 @@ import ProductCard from "../../../components/molecules/ProductCard";
 
 export default function SavedPage() {
   const savedProduct = useSelector((state) => state.saved.savedProducts);
-  const products = useSelector((state) => state.products.products)
+  const products = useSelector((state) => state.products.products);
 
-  let product = {}
+  let product = {};
 
   return (
     <>
       <PageContainer>
         <CardContainer>
           {savedProduct?.map((id) => {
-            product = products?.find((i) => i.id === id)
-            return (
-              <ProductCard
-                key={product?.id}
-                product={product}
-              />
-            )
+            product = products?.find((i) => i.id === id);
+            return <ProductCard key={product?.id} product={product} />;
           })}
         </CardContainer>
       </PageContainer>

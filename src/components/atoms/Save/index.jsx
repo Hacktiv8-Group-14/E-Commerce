@@ -7,6 +7,8 @@ import {
   deleteSavedProducts,
 } from "../../../features/savedSlice";
 import { useEffect } from "react";
+import { getUser } from "../../../features/helpers";
+import { useNavigate } from "react-router-dom";
 
 export default function Save(props) {
   const { product } = props;
@@ -28,9 +30,20 @@ export default function Save(props) {
     }
   };
 
+  const navigate = useNavigate();
+
   return (
     <>
-      <Button className="absolute top-0 right-0 p-3" onClick={Saved}>
+      <Button
+        className="absolute top-0 right-0 p-3"
+        onClick={
+          getUser()
+            ? Saved
+            : () => {
+                navigate("/login");
+              }
+        }
+      >
         {save ? (
           <AiFillHeart size={30} className="text-red-600" />
         ) : (

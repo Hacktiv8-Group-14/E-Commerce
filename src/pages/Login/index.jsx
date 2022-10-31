@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate, useResolvedPath } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Buttton from "../../components/atoms/Buttons";
 import Input from "../../components/atoms/Input";
 import PageContainer from "../../components/container/PageContainer";
-import { admin, getUser, User } from "../../features/helpers";
+import { admin, User } from "../../features/helpers";
+import axios from "axios";
 export default function Login() {
   const [user, setUser] = useState({ name: "", password: "" });
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleOnChange = (e) => {
@@ -19,33 +18,30 @@ export default function Login() {
     }
   };
 
-  const userLogin = async (userEmail, userPassword) => {
-    try {
-      const response = await fetch("https://fakestoreapi.com/auth/login", {
-        method: "POST",
-        headers: {
-          "access-control-allow-origin": "*",
-          "Content-type": "application/json; charset=UTF-8",
-        },
-        body: JSON.stringify({
-          email: userEmail,
-          password: userPassword,
-        }),
-      });
-      User(response.json.token);
-    } catch (err) {
-      throw err;
-    }
+  const isAdmin = () => {
+    admin("isAdmin");
+    navigate("/admin");
   };
 
-  const login = () => {
+  const isUser = (username, password) => {
+    axios
+      .post("https://fakestoreapi.com/auth/login", {
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        User(response.data.token);
+        navigate("/");
+      });
+  };
+
+  const login = (e) => {
     if (user.email === "admin@bukapedia.com" && user.password === "admin123") {
-      admin("isAdmin");
-      navigate("/admin");
-    } else if (userLogin(user.email, user.password)) {
-      navigate("/");
+      isAdmin();
+      e.preventDefault();
     } else {
-      alert("login tidak berhasil");
+      isUser(user.email, user.password);
+      e.preventDefault();
     }
   };
 
@@ -59,7 +55,7 @@ export default function Login() {
               <div>Email</div>
               <Input
                 name="email"
-                type="email"
+                type="text"
                 placeholder="input here"
                 className="border border-black w-full"
                 onChange={handleOnChange}
