@@ -3,7 +3,7 @@ import Header from "../../../components/molecules/Header/index.";
 import { RowContainer } from "../../../components/container/RowContainer";
 import ProductRow from "../../../components/molecules/ProductRow";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "../../../components/atoms/Buttons";
 import { deleteItem } from "../../../features/cartSlice";
@@ -17,6 +17,7 @@ export default function Cart() {
 
   const products = useSelector((state) => state.products.products);
   const cart = useSelector((state) => state.cart.items);
+  const user = useSelector(state => state.login.user)
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [checkedItems, setCheckedItems] = useState([]);
@@ -55,41 +56,46 @@ export default function Cart() {
 
   let product = {};
 
-  return (
-    <PageContainer>
-      <Header>Cart</Header>
-      <RowContainer>
-        {cart.map((item) => {
-          product = products?.find((product) => product.id === item.id);
-          return (
-            <ProductRow
-              key={item?.id}
-              id={item?.id}
-              img={product?.image}
-              title={product?.title}
-              price={product?.price}
-              stock={product?.stock}
-              isChecked={item?.isChecked}
-              totalItem={item?.total}
-            />
-          );
-        })}
-        {/* buat nampilin total harga yang dicheck sm tombol checkout */}
-        <BottomBarContainer>
-          <div className="flex justify-between sm:justify-between sm:gap-10 items-center">
-            <div className="text-base sm:text-xl">
-              Total: <b>US$ {totalPrice}</b>
+  if(user){
+    return (
+      <PageContainer>
+        <Header>Cart</Header>
+        <RowContainer>
+          {cart.map((item) => {
+            product = products?.find((product) => product.id === item.id);
+            return (
+              <ProductRow
+                key={item?.id}
+                id={item?.id}
+                img={product?.image}
+                title={product?.title}
+                price={product?.price}
+                stock={product?.stock}
+                isChecked={item?.isChecked}
+                totalItem={item?.total}
+              />
+            );
+          })}
+          {/* buat nampilin total harga yang dicheck sm tombol checkout */}
+          <BottomBarContainer>
+            <div className="flex justify-between sm:justify-between sm:gap-10 items-center">
+              <div className="text-base sm:text-xl">
+                Total: <b>US$ {totalPrice}</b>
+              </div>
+              <Button
+                disabled={checkedItems.length === 0 ? true : false}
+                className="font-bold text-sm sm:text-lg border-2 border-[#F64C72] hover:border-white disabled:border-[#F64C72]/50 p-2 rounded-lg text-[#F64C72] hover:text-white disabled:text-[#F64C72]/50 transition"
+                onClick={onClickCheckout}
+              >
+                Checkout
+              </Button>
             </div>
-            <Button
-              disabled={checkedItems.length === 0 ? true : false}
-              className="font-bold text-sm sm:text-lg border-2 border-[#F64C72] hover:border-white disabled:border-[#F64C72]/50 p-2 rounded-lg text-[#F64C72] hover:text-white disabled:text-[#F64C72]/50 transition"
-              onClick={onClickCheckout}
-            >
-              Checkout
-            </Button>
-          </div>
-        </BottomBarContainer>
-      </RowContainer>
-    </PageContainer>
-  );
+          </BottomBarContainer>
+        </RowContainer>
+      </PageContainer>
+    );
+  } else{
+    return <Navigate to="/Login" />
+  }
+  
 }
