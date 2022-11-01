@@ -3,23 +3,25 @@ import PageContainer from "../../../components/container/PageContainer";
 import { useSelector } from "react-redux";
 import Save from "../../../components/atoms/Save";
 import { AiFillStar } from "react-icons/ai";
+
 import Recomendation from "../../../components/molecules/Recomendation";
 import { useState } from "react";
 import Button from "../../../components/atoms/Buttons";
 import { useDispatch } from "react-redux";
 import { addCart, minCart } from "../../../features/cartSlice";
 import Quantity from "../../../components/atoms/Quantity";
+import Breadcrumb from "../../../components/molecules/Breadcrumb";
 
 export default function DetailPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const products = useSelector((state) => state.products.products);
   const cartItem = useSelector((state) => state.cart.items).find(
     (item) => item.id === Number(id)
   );
-  const user = useSelector(state => state.login.user)
+  const user = useSelector((state) => state.login.user);
 
   const product = products?.find((item) => item.id === Number(id));
 
@@ -32,6 +34,12 @@ export default function DetailPage() {
   return (
     <>
       <PageContainer>
+        <Breadcrumb
+          list={[
+            { url: "/", name: "Home" },
+            { url: `/Detail/${id}`, name: `Details` },
+          ]}
+        />
         <div className="mx-auto overflow-hidden">
           <div className="lg:grid grid-cols-2">
             <div className=" border relative">
@@ -114,10 +122,10 @@ export default function DetailPage() {
                       <Button
                         className="bg-[#242582] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
                         onClick={() => {
-                          if(user){
+                          if (user) {
                             dispatch(addCart(Number(id)));
-                          } else{
-                            navigate('/Login')
+                          } else {
+                            navigate("/Login");
                           }
                         }}
                       >
