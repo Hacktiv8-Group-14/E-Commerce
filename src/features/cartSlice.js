@@ -8,27 +8,54 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers:{
-        // action.payload = id product
+        // action.payload = {id, username}
         addCart: (state, action) => {
-            let toggle = false
-            state.items.forEach((item) => {
-                if(item.id === action.payload){
-                    item.total += 1
-                    toggle = true
+            let isNotFirstUser = state.items.some(item => item.username === action.payload.username)
+
+            if(isNotFirstUser){
+                let userIndex = state.items.findIndex(item => item.username === action.payload.username)
+                let toggle = false
+                state.items[userIndex].cartItems.forEach(item => {
+                    if(item.id === action.payload.id){
+                        item.total += 1
+                        toggle = true
+                    }
+                })
+                if(!toggle){
+                    state.items[userIndex].cartItems = [
+                        ...state.items[userIndex].cartItems, 
+                        {
+                            id: action.payload.id, 
+                            total: 1, 
+                            isChecked: false
+                        }
+                    ]
                 }
-            })
-            if(!toggle){
-                state.items = [...state.items, {id: action.payload, total: 1, isChecked: false}]
+            } else{
+                state.items = [
+                    ...state.items, 
+                    {
+                        username: action.payload.username, 
+                        cartItems: [{
+                            id: action.payload.id, 
+                            total: 1, 
+                            isChecked: false
+                        }]
+                    }
+                ]
             }
         },
         minCart: (state, action) => {
-            state.items.forEach((item) => {
-                if(item.id === action.payload){
+            let userIndex = state.items.findIndex(item => item.username === action.payload.username)
+            state.items[userIndex].cartItems.forEach(item => {
+                if(item.id === action.payload.id){
                     item.total -= 1
                 }
             })
-            const filterItems = state.items.filter((item) => item.total !== 0)
-            state.items = [...filterItems]
+            const filterCartItems = state.items[userIndex].cartItems.filter(item => item.total !== 0)
+            state.items[userIndex].cartItems = [...filterCartItems]
+            const filterUser = state.items.filter(item => item.cartItems.length > 0)
+            state.items = [...filterUser]
         },
         changeIsChecked: (state, action) => {
             state.items.forEach((item) => {

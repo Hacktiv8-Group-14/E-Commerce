@@ -22,8 +22,8 @@ export default function Recomendation(props) {
     <>
       <Header>Related Products</Header>
       <CardContainer>
-        {filter.map((items) => (
-          <ProductCard product={items} />
+        {filter.map((items, index) => (
+          <ProductCard key={index} product={items} />
         ))}
       </CardContainer>
     </>

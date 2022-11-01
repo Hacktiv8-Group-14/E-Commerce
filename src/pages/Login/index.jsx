@@ -5,7 +5,7 @@ import Input from "../../components/atoms/Input";
 import PageContainer from "../../components/container/PageContainer";
 import axios from "axios";
 import { useDispatch } from "react-redux"
-import { setUser, setAdmin } from "../../features/loginSlice";
+import { setUser, setUserName, setAdmin } from "../../features/loginSlice";
 export default function Login() {
   const [userValue, setUserValue] = useState({ name: "", password: "" });
 
@@ -34,6 +34,7 @@ export default function Login() {
       })
       .then((response) => {
         dispatch(setUser(response.data.token))
+        dispatch(setUserName(username))
         navigate("/");
       });
   };

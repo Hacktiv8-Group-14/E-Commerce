@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Save from "../../../components/atoms/Save";
 import { AiFillStar } from "react-icons/ai";
 import Recomendation from "../../../components/molecules/Recomendation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../../components/atoms/Buttons";
 import { useDispatch } from "react-redux";
 import { addCart, minCart } from "../../../features/cartSlice";
@@ -15,11 +15,18 @@ export default function DetailPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
-  const products = useSelector((state) => state.products.products);
-  const cartItem = useSelector((state) => state.cart.items).find(
-    (item) => item.id === Number(id)
-  );
   const user = useSelector(state => state.login.user)
+  const userName = useSelector(state => state.login.userName)
+  const products = useSelector((state) => state.products.products);
+  const userCartItem = useSelector((state) => state.cart.items).find(
+    (item) => item.username === userName
+  );
+  
+  const [cartItem, setCartItem] = useState(null)
+
+  useEffect(() => {
+    setCartItem(userCartItem?.cartItems.find(item => item.id === Number(id)))
+  }, [userCartItem]);
 
   const product = products?.find((item) => item.id === Number(id));
 
@@ -90,7 +97,7 @@ export default function DetailPage() {
                 </div>
               </div>
               <div className="my-3">
-                {product.stock === 0 ? (
+                {product?.stock === 0 ? (
                   <Button
                     className="bg-[#e73737] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
                     disabled="true"
@@ -102,20 +109,20 @@ export default function DetailPage() {
                     {cartItem && user ? (
                       <Quantity
                         minClick={() => {
-                          dispatch(minCart(Number(id)));
+                          dispatch(minCart({id: Number(id), username: userName}));
                         }}
                         plusClick={() => {
-                          dispatch(addCart(Number(id)));
+                          dispatch(addCart({id: Number(id), username: userName}));
                         }}
                         quantity={cartItem?.total}
-                        stock={product.stock}
+                        stock={product?.stock}
                       />
                     ) : (
                       <Button
                         className="bg-[#242582] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
                         onClick={() => {
                           if(user){
-                            dispatch(addCart(Number(id)));
+                            dispatch(addCart({id: Number(id), username: userName}));
                           } else{
                             navigate('/Login')
                           }
@@ -130,7 +137,7 @@ export default function DetailPage() {
             </div>
           </div>
         </div>
-        <Recomendation category={product.category} />
+        <Recomendation category={product?.category} />
       </PageContainer>
     </>
   );
