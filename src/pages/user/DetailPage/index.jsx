@@ -3,17 +3,19 @@ import PageContainer from "../../../components/container/PageContainer";
 import { useSelector } from "react-redux";
 import Save from "../../../components/atoms/Save";
 import { AiFillStar } from "react-icons/ai";
+
 import Recomendation from "../../../components/molecules/Recomendation";
 import { useState, useEffect } from "react";
 import Button from "../../../components/atoms/Buttons";
 import { useDispatch } from "react-redux";
 import { addCart, minCart } from "../../../features/cartSlice";
 import Quantity from "../../../components/atoms/Quantity";
+import Breadcrumb from "../../../components/molecules/Breadcrumb";
 
 export default function DetailPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const user = useSelector(state => state.login.user)
   const userName = useSelector(state => state.login.userName)
@@ -39,6 +41,12 @@ export default function DetailPage() {
   return (
     <>
       <PageContainer>
+        <Breadcrumb
+          list={[
+            { url: "/", name: "Home" },
+            { url: `/Detail/${id}`, name: `Details` },
+          ]}
+        />
         <div className="mx-auto overflow-hidden">
           <div className="lg:grid grid-cols-2">
             <div className=" border relative">
