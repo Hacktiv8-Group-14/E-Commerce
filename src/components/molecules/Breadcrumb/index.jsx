@@ -3,7 +3,7 @@ import "./style.css";
 
 export default function Breadcrumb({ list }) {
   return (
-    <section className="py-4">
+    <section className="my-2">
       <div className="mx-auto">
         <ul className="breadcrumb">
           {list?.map((item) => {

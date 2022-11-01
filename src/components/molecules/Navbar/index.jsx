@@ -12,12 +12,13 @@ function Navbar() {
   const dispatch = useDispatch()
 
   const user = useSelector(state => state.login.user)
+  const userName = useSelector(state => state.login.userName)
 
   return (
     <nav className="w-full font-bold text-white bg-[#242582] p-2 sm:p-4 flex justify-between flex-col sm:flex-row fixed z-10 top-0">
       <div className="flex flex-row justify-between mb-2 sm:mb-0">
         {/* Nav Brand(?)/Header */}
-        <Logo />
+        <Logo username={userName} />
 
         {/* Button for Expanding Nav Link when Small Screen */}
         <button

@@ -68,13 +68,13 @@ export default function Cart() {
   if (user) {
     return (
       <PageContainer>
-        <Header>Cart</Header>
         <Breadcrumb
           list={[
             { url: "/", name: "Home" },
             { url: "/cart", name: "Shoping Cart" },
           ]}
         />
+        <Header>Cart</Header>
         {cart?.length ? (
           <RowContainer>
             {cart?.map((item) => {

@@ -34,13 +34,15 @@ export default function ProductCard(props) {
 
             <div className="px-2">
               {/* Product Price */}
-              <div className="sm:text-lg  font-semibold my-2 text-[#242582] flex items-center">
-                <div>US$ {product?.price}</div>
-                <div className="mx-2 text-base text-[#a32929] bg-[#ff9999] rounded-lg px-2">
-                  50%
-                </div>
+              <div className="sm:text-lg  font-semibold my-2 text-[#242582] flex flex-col sm:flex-row sm:items-center">
                 <div className="line-through text-slate-400 text-base">
                   ${product?.price * 2}
+                </div>
+                <div>
+                  <div className="mr-2 md:mx-2 inline-block">US$ {product?.price}</div>
+                  <div className="inline-block text-base text-[#a32929] bg-[#ff9999] rounded-lg px-2">
+                    50%
+                  </div>
                 </div>
               </div>
 

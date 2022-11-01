@@ -29,7 +29,7 @@ const loginSlice = createSlice({
             localStorage.removeItem("username");
             localStorage.removeItem("admin");
             state.user = null
-            state.user = null
+            state.userName = null
             state.admin = null
         }
     }
