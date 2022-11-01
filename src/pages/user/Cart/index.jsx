@@ -16,9 +16,17 @@ export default function Cart() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const userName = useSelector(state => state.login.userName)
   const products = useSelector((state) => state.products.products);
-  const cart = useSelector((state) => state.cart.items);
+  // const cart = useSelector((state) => state.cart.items);
   const user = useSelector((state) => state.login.user);
+  const cart = useSelector((state) => state.cart.items).find((item) => item.username === userName)?.cartItems;
+
+  // const [cart, setCart] = useState(null)
+
+  // useEffect(() => {
+  //   setCart(userCartItem?.cartItems.find(item => item.id === Number(id)))
+  // }, [userCartItem]);
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [checkedItems, setCheckedItems] = useState([]);
@@ -32,19 +40,19 @@ export default function Cart() {
     });
     checkedItems.forEach((item) => {
       dispatch(soldProduct({ id: item.id, total: item.total }));
-      dispatch(deleteItem(item.id));
+      dispatch(deleteItem({id: item.id, username: userName}));
     });
     navigate("/");
   };
 
   useEffect(() => {
-    setCheckedItems(cart.filter((item) => item.isChecked));
+    setCheckedItems(cart?.filter((item) => item.isChecked));
   }, [cart]);
 
   useEffect(() => {
     const setTotal = () => {
       let temp = 0;
-      checkedItems.forEach((item) => {
+      checkedItems?.forEach((item) => {
         let productPrice = products.find(
           (product) => product.id === item.id
         ).price;
@@ -67,9 +75,9 @@ export default function Cart() {
             { url: "/cart", name: "Shoping Cart" },
           ]}
         />
-        {cart.length ? (
+        {cart?.length ? (
           <RowContainer>
-            {cart.map((item) => {
+            {cart?.map((item) => {
               product = products?.find((product) => product.id === item.id);
               return (
                 <ProductRow
@@ -81,6 +89,7 @@ export default function Cart() {
                   stock={product?.stock}
                   isChecked={item?.isChecked}
                   totalItem={item?.total}
+                  userName = {userName}
                 />
               );
             })}

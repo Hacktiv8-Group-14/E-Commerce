@@ -7,7 +7,6 @@ import {
   minCart,
   changeIsChecked,
   deleteItem,
-  changeItemTotalBy,
 } from "../../../features/cartSlice";
 import Swal from "sweetalert2";
 import Quantity from "../../atoms/Quantity";
@@ -20,6 +19,7 @@ export default function ProductRow({
   totalItem,
   stock,
   isChecked,
+  userName
 }) {
   const dispatch = useDispatch();
 
@@ -36,12 +36,12 @@ export default function ProductRow({
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          dispatch(minCart(id));
+          dispatch(minCart({id: id, username: userName}));
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       });
     } else if (totalItem > 1) {
-      dispatch(minCart(id));
+      dispatch(minCart({id: id, username: userName}));
     }
   };
 
@@ -54,7 +54,7 @@ export default function ProductRow({
           className=" scale-150 md:scale-[2] "
           checked={isChecked}
           onChange={() => {
-            dispatch(changeIsChecked(id));
+            dispatch(changeIsChecked({id: id, username: userName}));
           }}
         />
         {/* gambar produk */}
@@ -76,7 +76,7 @@ export default function ProductRow({
         {/* tombol hapus item dari cart */}
         <Button
           className="text-sm sm:text-xl hover:bg-[#242582] hover:text-white rounded-full px-3 transition"
-          onClick={() => dispatch(deleteItem(id))}
+          onClick={() => dispatch(deleteItem({id: id, username: userName}))}
         >
           <BsFillTrashFill />
         </Button>
@@ -84,7 +84,7 @@ export default function ProductRow({
           className="w-24 sm:w-32"
           minClick={minClick}
           plusClick={() => {
-            dispatch(addCart(id));
+            dispatch(addCart({id: id, username: userName}));
           }}
           quantity={totalItem}
           stock={stock}

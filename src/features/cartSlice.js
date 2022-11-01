@@ -58,26 +58,30 @@ const cartSlice = createSlice({
             state.items = [...filterUser]
         },
         changeIsChecked: (state, action) => {
-            state.items.forEach((item) => {
-                if(item.id === action.payload){
+            let userIndex = state.items.findIndex(item => item.username === action.payload.username)
+            state.items[userIndex].cartItems.forEach((item) => {
+                if(item.id === action.payload.id){
                     item.isChecked = !item.isChecked
                 }
             })
         },
         deleteItem: (state, action) => {
-            const filterItems = state.items.filter((item) => item.id !== action.payload)
-            state.items = [...filterItems]
+            let userIndex = state.items.findIndex(item => item.username === action.payload.username)
+            const filterCartItems = state.items[userIndex].cartItems.filter((item) => item.id !== action.payload.id)
+            state.items[userIndex].cartItems = [...filterCartItems]
+            const filterUser = state.items.filter(item => item.cartItems.length > 0)
+            state.items = [...filterUser]
         },
         // action.payload = {id: , total: }
-        changeItemTotalBy: (state, action) => {
-            state.items.forEach(item => {
-                if(item.id === action.payload.id){
-                    item.total = action.payload.total
-                }
-            })
-        }
+        // changeItemTotalBy: (state, action) => {
+        //     state.items.forEach(item => {
+        //         if(item.id === action.payload.id){
+        //             item.total = action.payload.total
+        //         }
+        //     })
+        // }
     }
 })
 
-export const { addCart, minCart, changeIsChecked, deleteItem, changeItemTotalBy } = cartSlice.actions
+export const { addCart, minCart, changeIsChecked, deleteItem } = cartSlice.actions
 export default cartSlice.reducer
