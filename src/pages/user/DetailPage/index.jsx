@@ -17,17 +17,17 @@ export default function DetailPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector(state => state.login.user)
-  const userName = useSelector(state => state.login.userName)
+  const user = useSelector((state) => state.login.user);
+  const userName = useSelector((state) => state.login.userName);
   const products = useSelector((state) => state.products.products);
   const userCartItem = useSelector((state) => state.cart.items).find(
     (item) => item.username === userName
   );
-  
-  const [cartItem, setCartItem] = useState(null)
+
+  const [cartItem, setCartItem] = useState(null);
 
   useEffect(() => {
-    setCartItem(userCartItem?.cartItems.find(item => item.id === Number(id)))
+    setCartItem(userCartItem?.cartItems.find((item) => item.id === Number(id)));
   }, [userCartItem]);
 
   const product = products?.find((item) => item.id === Number(id));
@@ -117,10 +117,14 @@ export default function DetailPage() {
                     {cartItem && user ? (
                       <Quantity
                         minClick={() => {
-                          dispatch(minCart({id: Number(id), username: userName}));
+                          dispatch(
+                            minCart({ id: Number(id), username: userName })
+                          );
                         }}
                         plusClick={() => {
-                          dispatch(addCart({id: Number(id), username: userName}));
+                          dispatch(
+                            addCart({ id: Number(id), username: userName })
+                          );
                         }}
                         quantity={cartItem?.total}
                         stock={product?.stock}
@@ -129,10 +133,12 @@ export default function DetailPage() {
                       <Button
                         className="bg-[#242582] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
                         onClick={() => {
-                          if(user){
-                            dispatch(addCart({id: Number(id), username: userName}));
-                          } else{
-                            navigate('/Login')
+                          if (user) {
+                            dispatch(
+                              addCart({ id: Number(id), username: userName })
+                            );
+                          } else {
+                            navigate("/Login");
                           }
                         }}
                       >

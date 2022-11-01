@@ -16,12 +16,14 @@ export default function Cart() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const userName = useSelector(state => state.login.userName)
+  const userName = useSelector((state) => state.login.userName);
   const products = useSelector((state) => state.products.products);
-  // const cart = useSelector((state) => state.cart.items);
   const user = useSelector((state) => state.login.user);
-  const cart = useSelector((state) => state.cart.items).find((item) => item.username === userName)?.cartItems;
+  const cart = useSelector((state) => state.cart.items).find(
+    (item) => item.username === userName
+  )?.cartItems;
 
+  console.log("ini cart", cart);
   // const [cart, setCart] = useState(null)
 
   // useEffect(() => {
@@ -40,7 +42,7 @@ export default function Cart() {
     });
     checkedItems.forEach((item) => {
       dispatch(soldProduct({ id: item.id, total: item.total }));
-      dispatch(deleteItem({id: item.id, username: userName}));
+      dispatch(deleteItem({ id: item.id, username: userName }));
     });
     navigate("/");
   };
@@ -89,7 +91,7 @@ export default function Cart() {
                   stock={product?.stock}
                   isChecked={item?.isChecked}
                   totalItem={item?.total}
-                  userName = {userName}
+                  userName={userName}
                 />
               );
             })}
