@@ -22,8 +22,6 @@ export default function Cart() {
   const cart = useSelector((state) => state.cart.items).find(
     (item) => item.username === userName
   )?.cartItems;
-
-  console.log("ini cart", cart);
   // const [cart, setCart] = useState(null)
 
   // useEffect(() => {

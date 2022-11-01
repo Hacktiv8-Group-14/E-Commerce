@@ -5,7 +5,7 @@ import Save from "../../../components/atoms/Save";
 import { AiFillStar } from "react-icons/ai";
 
 import Recomendation from "../../../components/molecules/Recomendation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "../../../components/atoms/Buttons";
 import { useDispatch } from "react-redux";
 import { addCart, minCart } from "../../../features/cartSlice";
@@ -22,13 +22,14 @@ export default function DetailPage() {
   const products = useSelector((state) => state.products.products);
   const userCartItem = useSelector((state) => state.cart.items).find(
     (item) => item.username === userName
-  );
+  )?.cartItems;
+  const cartItem = userCartItem?.find((item) => item.id === Number(id))
 
-  const [cartItem, setCartItem] = useState(null);
+  // const [cartItem, setCartItem] = useState(null);
 
-  useEffect(() => {
-    setCartItem(userCartItem?.cartItems.find((item) => item.id === Number(id)));
-  }, [userCartItem]);
+  // useEffect(() => {
+  //   setCartItem(userCartItem?.find((item) => item.id === Number(id)));
+  // }, [userCartItem]);
 
   const product = products?.find((item) => item.id === Number(id));
 
@@ -108,7 +109,7 @@ export default function DetailPage() {
                 {product?.stock === 0 ? (
                   <Button
                     className="bg-[#e73737] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
-                    disabled="true"
+                    disabled={true}
                   >
                     Sold Out
                   </Button>

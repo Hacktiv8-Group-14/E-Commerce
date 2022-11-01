@@ -48,6 +48,14 @@ export default function Quantity(props) {
           <AiOutlinePlus />
         </Button>
       </div>
+      <div className=" text-red-500 text-xs">
+            {/* {value < minValue && `*Minimum item is ${minValue}`} */}
+            
+            {stock === 0 ? `*Item's sold out`
+              : quantity > stock ? `*Maximum item is ${stock}`
+              : null
+            }
+      </div>
     </div>
   );
 }

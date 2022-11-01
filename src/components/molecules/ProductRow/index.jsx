@@ -10,7 +10,6 @@ import {
 } from "../../../features/cartSlice";
 import Swal from "sweetalert2";
 import Quantity from "../../atoms/Quantity";
-import productSlice from "../../../features/productSlice";
 
 export default function ProductRow({
   id,
@@ -51,7 +50,7 @@ export default function ProductRow({
     <div className="w-11/12 sm:w-4/5 flex justify-between items-center border-2 rounded-lg p-4">
       <div className="flex items-center p-2 gap-4 sm:gap-8">
         {/* checkbox */}
-        {stock === 0 ? (
+        {stock === 0 || totalItem > stock ? (
           <></>
         ) : (
           <input
@@ -71,6 +70,7 @@ export default function ProductRow({
                 <img
                   className="absolute"
                   src="https://freepngimg.com/thumb/sold_out/1-2-sold-out-png-picture-thumb.png"
+                  alt="sold out"
                 />
                 <img
                   src={img}
