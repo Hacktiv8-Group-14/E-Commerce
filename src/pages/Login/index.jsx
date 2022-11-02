@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Buttton from "../../components/atoms/Buttons";
 import Input from "../../components/atoms/Input";
 import PageContainer from "../../components/container/PageContainer";
@@ -7,6 +8,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux"
 import { setUser, setUserName, setAdmin } from "../../features/loginSlice";
 export default function Login() {
+  const admin = useSelector((state) => state.login.admin)
+  const user = useSelector((state) => state.login.user)
   const [userValue, setUserValue] = useState({ name: "", password: "" });
 
   const dispatch = useDispatch()
@@ -23,7 +26,7 @@ export default function Login() {
 
   const isAdmin = () => {
     dispatch(setAdmin())
-    navigate("/admin");
+    navigate("/");
   };
 
   const isUser = (username, password) => {
@@ -49,42 +52,46 @@ export default function Login() {
     }
   };
 
-  return (
-    <>
-      <PageContainer>
-        <div className="flex justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
-          <div className="w-full max-w-md border p-4">
-            <div className="text-center">Login</div>
-            <form>
-              <div>Username</div>
-              <Input
-                name="username"
-                type="text"
-                placeholder="input here"
-                className="border border-black w-full"
-                onChange={handleOnChange}
-                value={userValue.username}
-              />
-
-              <div>Password</div>
-              <Input
-                name="password"
-                type="password"
-                placeholder="input here"
-                className="border border-black w-full"
-                onChange={handleOnChange}
-                value={userValue.password}
-              />
-              <Buttton
-                className="bg-[#242582] w-full text-white p-2 mt-4"
-                onClick={login}
-              >
-                Login
-              </Buttton>
-            </form>
+  if(admin || user) {
+    return <Navigate to="/" />
+  } else {
+    return (
+      <>
+        <PageContainer>
+          <div className="flex justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
+            <div className="w-full max-w-md border p-4">
+              <div className="text-center">Login</div>
+              <form>
+                <div>Username</div>
+                <Input
+                  name="username"
+                  type="text"
+                  placeholder="input here"
+                  className="border border-black w-full"
+                  onChange={handleOnChange}
+                  value={userValue.username}
+                />
+  
+                <div>Password</div>
+                <Input
+                  name="password"
+                  type="password"
+                  placeholder="input here"
+                  className="border border-black w-full"
+                  onChange={handleOnChange}
+                  value={userValue.password}
+                />
+                <Buttton
+                  className="bg-[#242582] w-full text-white p-2 mt-4"
+                  onClick={login}
+                >
+                  Login
+                </Buttton>
+              </form>
+            </div>
           </div>
-        </div>
-      </PageContainer>
-    </>
-  );
+        </PageContainer>
+      </>
+    );
+  }
 }

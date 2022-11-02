@@ -26,10 +26,10 @@ export const routes = [
     path: "/Save",
     element: SavedPage,
   },
-  {
-    path: "/admin",
-    element: Admin,
-  },
+  // {
+  //   path: "/admin",
+  //   element: Admin,
+  // },
 ];
 
 export default {

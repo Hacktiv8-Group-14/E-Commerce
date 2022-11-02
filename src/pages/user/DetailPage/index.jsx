@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import PageContainer from "../../../components/container/PageContainer";
 import { useSelector } from "react-redux";
 import Save from "../../../components/atoms/Save";
@@ -18,6 +18,7 @@ export default function DetailPage() {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.login.user);
+  const admin = useSelector((state) => state.login.admin);
   const userName = useSelector((state) => state.login.userName);
   const products = useSelector((state) => state.products.products);
   const userCartItem = useSelector((state) => state.cart.items).find(
@@ -39,121 +40,126 @@ export default function DetailPage() {
     setText(!text);
   };
 
-  return (
-    <>
-      <PageContainer>
-        <Breadcrumb
-          list={[
-            { url: "/", name: "Home" },
-            { url: `/Detail/${id}`, name: `Details` },
-          ]}
-        />
-        <div className="mx-auto overflow-hidden">
-          <div className="lg:grid grid-cols-2">
-            <div className=" border relative">
-              <Save product={product} />
-              <img
-                className="w-full  p-8"
-                src={product?.image}
-                alt="Modern building architecture"
-              />
-            </div>
-            <div className="lg:ml-3 ">
-              <div className="uppercase tracking-wide font-semibold sm:text-lg md:text-xl 2xl:text-3xl ">
-                {product?.title}
+  if(admin) {
+    return <Navigate to="/" />
+  } else {
+    return (
+      <>
+        <PageContainer>
+          <Breadcrumb
+            list={[
+              { url: "/", name: "Home" },
+              { url: `/Detail/${id}`, name: `Details` },
+            ]}
+          />
+          <div className="mx-auto overflow-hidden mb-10">
+            <div className="lg:grid grid-cols-2">
+              <div className=" border relative">
+                <Save product={product} />
+                <img
+                  className="w-full h-96 md:h-[620px] p-8"
+                  src={product?.image}
+                  alt="Modern building architecture"
+                />
               </div>
-              <div className="flex mt-2">
-                <div>{`Terjual ${product?.productSold}`}</div>
-                <div className="ml-5 flex items-center">
-                  <AiFillStar className="text-amber-500" />
-                  <div className="mr-2">{product?.rating.rate}</div>
-                  <div>{`(${product?.rating.count} ulasan)`}</div>
+              <div className="lg:ml-3 ">
+                <div className="uppercase tracking-wide font-semibold sm:text-lg md:text-xl 2xl:text-3xl ">
+                  {product?.title}
                 </div>
-              </div>
-              <div className=" my-4 font-medium text-[#242582] text-3xl flex items-center">
-                $ {product?.price}
-                <div className="mx-2 text-lg text-[#a32929] bg-[#ff9999] rounded-lg px-2 ">
-                  50%
+                <div className="flex mt-2">
+                  <div>{`Terjual ${product?.productSold}`}</div>
+                  <div className="ml-5 flex items-center">
+                    <AiFillStar className="text-amber-500" />
+                    <div className="mr-2">{product?.rating.rate}</div>
+                    <div>{`(${product?.rating.count} ulasan)`}</div>
+                  </div>
                 </div>
-                <div className="line-through text-slate-400 text-xl ">
-                  ${product?.price * 2}
+                <div className=" my-4 font-medium text-[#242582] text-3xl flex items-center">
+                  $ {product?.price}
+                  <div className="mx-2 text-lg text-[#a32929] bg-[#ff9999] rounded-lg px-2 ">
+                    50%
+                  </div>
+                  <div className="line-through text-slate-400 text-xl ">
+                    ${product?.price * 2}
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <div className="w-full border-b pb-2">Detail</div>
-                <div className="flex">
-                  Category :
-                  <div className="font-bold ml-3">{product?.category}</div>
-                </div>
                 <div>
-                  <p
-                    className={`mt-2 text-slate-500 ${
-                      text === false ? "line-clamp-2" : ""
-                    }`}
-                  >
-                    {product?.description}
-                  </p>
-                  {text === true ? (
-                    <></>
-                  ) : (
-                    <Button
-                      children="Read more..."
-                      className="text-sky-600"
-                      onClick={readMore}
-                    />
-                  )}
-                </div>
-              </div>
-              <div className="my-3">
-                {product?.stock === 0 ? (
-                  <Button
-                    className="bg-[#e73737] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
-                    disabled={true}
-                  >
-                    Sold Out
-                  </Button>
-                ) : (
+                  <div className="w-full border-b pb-2">Detail</div>
+                  <div className="flex">
+                    Category :
+                    <div className="font-bold ml-3">{product?.category}</div>
+                  </div>
                   <div>
-                    {cartItem && user ? (
-                      <Quantity
-                        minClick={() => {
-                          dispatch(
-                            minCart({ id: Number(id), username: userName })
-                          );
-                        }}
-                        plusClick={() => {
-                          dispatch(
-                            addCart({ id: Number(id), username: userName })
-                          );
-                        }}
-                        quantity={cartItem?.total}
-                        stock={product?.stock}
-                      />
+                    <p
+                      className={`mt-2 text-slate-500 ${
+                        text === false ? "line-clamp-2" : ""
+                      }`}
+                    >
+                      {product?.description}
+                    </p>
+                    {text === true ? (
+                      <></>
                     ) : (
                       <Button
-                        className="bg-[#242582] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
-                        onClick={() => {
-                          if (user) {
+                        children="Read more..."
+                        className="text-sky-600"
+                        onClick={readMore}
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="my-3">
+                  {product?.stock === 0 ? (
+                    <Button
+                      className="bg-[#e73737] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
+                      disabled={true}
+                    >
+                      Sold Out
+                    </Button>
+                  ) : (
+                    <div>
+                      {cartItem && user ? (
+                        <Quantity
+                          className="w-full md:w-52"
+                          minClick={() => {
+                            dispatch(
+                              minCart({ id: Number(id), username: userName })
+                            );
+                          }}
+                          plusClick={() => {
                             dispatch(
                               addCart({ id: Number(id), username: userName })
                             );
-                          } else {
-                            navigate("/Login");
-                          }
-                        }}
-                      >
-                        Add Cart
-                      </Button>
-                    )}
-                  </div>
-                )}
+                          }}
+                          quantity={cartItem?.total}
+                          stock={product?.stock}
+                        />
+                      ) : (
+                        <Button
+                          className="bg-[#242582] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
+                          onClick={() => {
+                            if (user) {
+                              dispatch(
+                                addCart({ id: Number(id), username: userName })
+                              );
+                            } else {
+                              navigate("/Login");
+                            }
+                          }}
+                        >
+                          Add Cart
+                        </Button>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <Recomendation category={product?.category} />
-      </PageContainer>
-    </>
-  );
+          <Recomendation category={product?.category} />
+        </PageContainer>
+      </>
+    );
+  }
 }

@@ -12,13 +12,14 @@ function Navbar() {
   const dispatch = useDispatch()
 
   const user = useSelector(state => state.login.user)
+  const admin = useSelector(state => state.login.admin)
   const userName = useSelector(state => state.login.userName)
 
   return (
     <nav className="w-full font-bold text-white bg-[#242582] p-2 sm:p-4 flex justify-between flex-col sm:flex-row fixed z-10 top-0">
       <div className="flex flex-row justify-between mb-2 sm:mb-0">
         {/* Nav Brand(?)/Header */}
-        <Logo username={userName} />
+        <Logo username={admin ? 'Admin' : userName} />
 
         {/* Button for Expanding Nav Link when Small Screen */}
         <button
@@ -35,28 +36,34 @@ function Navbar() {
           isNavExpanded ? "flex" : "hidden sm:flex"
         }`}
       >
-        {/* User Navlink */}
-        <Link
-          to="/Save"
-          className="hover:text-[#F64C72] transition"
-          onClick={() => setIsNavExpanded(false)}
-        >
-          Save
-        </Link>
-        <Link
-          to="/Cart"
-          className="mx-0 sm:mx-16 my-3 sm:my-0 hover:text-[#F64C72] transition"
-          onClick={() => setIsNavExpanded(false)}
-        >
-          Cart
-        </Link>
-
-        {/* Admin Navlink */}
-        {/* <Link to="/" onClick={() => setIsNavExpanded(false)}>Home</Link>
-        <Link to="/sales" className="mx-0 sm:mx-16 my-4 sm:my-0" onClick={() => setIsNavExpanded(false)}>Sales Recap</Link> */}
+        {admin ? (
+          <>
+            {/* Admin Navlink */}
+            <Link to="/" onClick={() => setIsNavExpanded(false)}>Home</Link>
+            <Link to="/sales" className="mx-0 sm:mx-16 my-4 sm:my-0" onClick={() => setIsNavExpanded(false)}>Sales Recap</Link>
+          </>
+        ) : (
+          <>
+            {/* User Navlink */}
+            <Link
+              to="/Save"
+              className="hover:text-[#F64C72] transition"
+              onClick={() => setIsNavExpanded(false)}
+            >
+              Save
+            </Link>
+            <Link
+              to="/Cart"
+              className="mx-0 sm:mx-16 my-3 sm:my-0 hover:text-[#F64C72] transition"
+              onClick={() => setIsNavExpanded(false)}
+            >
+              Cart
+            </Link>
+          </>
+        )}
 
         {/* Login/Logout Button */}
-        {!user ? (
+        {!user && !admin ? (
           <Link to="/login">
             <Buttton className="border-[#F64C72] hover:border-white border-2 rounded-lg px-5 py-1 text-base sm:text-lg text-[#F64C72] hover:text-white transition">
               Login

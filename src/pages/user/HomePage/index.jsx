@@ -5,10 +5,12 @@ import CategoryNav from "../../../components/molecules/CategoryNav";
 import ProductCard from "../../../components/molecules/ProductCard";
 import PageContainer from "../../../components/container/PageContainer";
 import CardContainer from "../../../components/container/CardContainer";
+import Admin from "../../admin";
 
 export default function Homepage() {
   const categories = useSelector((state) => state.products.categories);
   const products = useSelector((state) => state.products.products);
+  const admin = useSelector((state) => state.login.admin)
 
   const [category, setCategory] = useState("all category");
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -22,22 +24,28 @@ export default function Homepage() {
     }
   }, [category, products]);
 
-  return (
-    <PageContainer>
-      <Header>Products</Header>
-      <CategoryNav
-        categories={categories}
-        category={category}
-        setCategory={setCategory}
-      />
-      <CardContainer>
-        {filteredProducts?.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-          />
-        ))}
-      </CardContainer>
-    </PageContainer>
-  );
+  if(admin){
+    return(
+      <Admin />
+    )
+  } else {
+    return (
+      <PageContainer>
+        <Header>Products</Header>
+        <CategoryNav
+          categories={categories}
+          category={category}
+          setCategory={setCategory}
+        />
+        <CardContainer>
+          {filteredProducts?.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+            />
+          ))}
+        </CardContainer>
+      </PageContainer>
+    );
+  }
 }
