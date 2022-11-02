@@ -24,14 +24,7 @@ export default function DetailPage() {
   const userCartItem = useSelector((state) => state.cart.items).find(
     (item) => item.username === userName
   )?.cartItems;
-  const cartItem = userCartItem?.find((item) => item.id === Number(id))
-
-  // const [cartItem, setCartItem] = useState(null);
-
-  // useEffect(() => {
-  //   setCartItem(userCartItem?.find((item) => item.id === Number(id)));
-  // }, [userCartItem]);
-
+  const cartItem = userCartItem?.find((item) => item.id === Number(id));
   const product = products?.find((item) => item.id === Number(id));
 
   const [text, setText] = useState(false);
@@ -40,8 +33,8 @@ export default function DetailPage() {
     setText(!text);
   };
 
-  if(admin) {
-    return <Navigate to="/" />
+  if (admin) {
+    return <Navigate to="/" />;
   } else {
     return (
       <>
