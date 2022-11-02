@@ -28,13 +28,13 @@ export default function ProductRow({
   const minClick = () => {
     if (totalItem <= 1) {
       Swal.fire({
-        title: "Are you sure deleted?",
-        text: "You won't be able to revert this!",
+        title: "Remove this item from cart?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes",
+        cancelButtonText: 'No'
       }).then((result) => {
         if (result.isConfirmed) {
           dispatch(minCart({ id: id, username: userName }));

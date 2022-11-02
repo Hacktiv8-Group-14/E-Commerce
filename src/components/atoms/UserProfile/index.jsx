@@ -17,7 +17,7 @@ export default function UserProfile() {
 
   const Logout = () => {
     Swal.fire({
-      title: "Are you sure Logout?",
+      title: "Logout from this account?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -26,7 +26,7 @@ export default function UserProfile() {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(removeLogin());
-        Swal.fire("Succes Logout", "success");
+        Swal.fire("Successfully logged out", "success");
       }
     });
   };

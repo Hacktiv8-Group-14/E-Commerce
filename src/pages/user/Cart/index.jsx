@@ -95,7 +95,7 @@ export default function Cart() {
             })}
             {/* buat nampilin total harga yang dicheck sm tombol checkout */}
             <BottomBarContainer>
-              <div className="flex justify-between sm:justify-between sm:gap-10 items-center">
+              <div className="flex justify-between sm:gap-10 items-center">
                 <div className="text-base sm:text-xl">
                   Total: <b>US$ {totalPrice}</b>
                 </div>

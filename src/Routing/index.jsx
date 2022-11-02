@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Cart from "../pages/user/Cart";
 import SavedPage from "../pages/user/SavedPage";
 import Admin from "../pages/admin";
+import RecapPage from "../pages/RecapPage";
 
 export const routes = [
   {
@@ -25,6 +26,10 @@ export const routes = [
   {
     path: "/Save",
     element: SavedPage,
+  },
+  {
+    path: "/Sales",
+    element: RecapPage,
   },
   // {
   //   path: "/admin",
