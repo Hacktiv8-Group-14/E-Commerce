@@ -16,23 +16,23 @@ export default function CategoryNav({ category, setCategory, categories }) {
         </button>
 
         {/* Category Nav for Large Screen */}
-        <div className="hidden sm:flex flex-row gap-8 text-xl">
+        <div className="hidden font-semibold sm:flex justify-center gap-8 text-lg text-gray-400">
           {categories.map((tag, index) => (
             <button
               key={index}
-              className={`hover:underline rounded p-1 ${
-                category === tag && "bg-[#242582] text-white transition"
+              className={`hover:underline rounded p-1  ${
+                category === tag && "text-[#242582] font-bold  transition"
               }`}
               onClick={() => setCategory(tag)}
             >
-              {tag}
+              {tag.toUpperCase()}
             </button>
           ))}
         </div>
 
         {/* Category Nav for Small Screen */}
         {isCategoryExpanded && (
-          <div className="absolute right-2 bg-white rounded-lg border-2 border-[#F64C72] flex flex-col gap-2 p-2 sm:hidden items-end text-sm">
+          <div className="absolute right-2 bg-white rounded-lg border-2  flex flex-col gap-2 p-2 sm:hidden  text-sm">
             {categories.map((tag, index) => (
               <button
                 key={index}
@@ -44,7 +44,7 @@ export default function CategoryNav({ category, setCategory, categories }) {
                   setIsCategoryExpanded(!isCategoryExpanded);
                 }}
               >
-                {tag}
+                {tag.toUpperCase()}
               </button>
             ))}
           </div>

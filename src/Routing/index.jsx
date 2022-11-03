@@ -3,8 +3,9 @@ import Homepage from "../pages/user/HomePage";
 import Login from "../pages/Login";
 import Cart from "../pages/user/Cart";
 import SavedPage from "../pages/user/SavedPage";
-import Admin from "../pages/admin";
-import RecapPage from "../pages/RecapPage";
+import RecapPage from "../pages/admin/RecapPage";
+import Dashboard from "../pages/admin/Dashboard";
+import StockUpdate from "../pages/admin/StockUpdate";
 
 export const routes = [
   {
@@ -30,6 +31,14 @@ export const routes = [
   {
     path: "/Sales",
     element: RecapPage,
+  },
+  {
+    path: "/Dashboard",
+    element: Dashboard,
+  },
+  {
+    path: "/Stock-update",
+    element: StockUpdate,
   },
   // {
   //   path: "/admin",

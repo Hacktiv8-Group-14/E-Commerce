@@ -1,16 +1,15 @@
-import Header from "../../../components/molecules/Header/index.";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CategoryNav from "../../../components/molecules/CategoryNav";
 import ProductCard from "../../../components/molecules/ProductCard";
 import PageContainer from "../../../components/container/PageContainer";
 import CardContainer from "../../../components/container/CardContainer";
-import Admin from "../../admin";
+import Admin from "../../admin/StockUpdate";
 
 export default function Homepage() {
   const categories = useSelector((state) => state.products.categories);
   const products = useSelector((state) => state.products.products);
-  const admin = useSelector((state) => state.login.admin)
+  const admin = useSelector((state) => state.login.admin);
 
   const [category, setCategory] = useState("all category");
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -24,14 +23,11 @@ export default function Homepage() {
     }
   }, [category, products]);
 
-  if(admin){
-    return(
-      <Admin />
-    )
+  if (admin) {
+    return <Admin />;
   } else {
     return (
       <PageContainer>
-        <Header>Products</Header>
         <CategoryNav
           categories={categories}
           category={category}
@@ -39,10 +35,7 @@ export default function Homepage() {
         />
         <CardContainer>
           {filteredProducts?.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
+            <ProductCard key={product.id} product={product} />
           ))}
         </CardContainer>
       </PageContainer>

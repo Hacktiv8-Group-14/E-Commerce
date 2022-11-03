@@ -5,14 +5,14 @@ import Buttton from "../../components/atoms/Buttons";
 import Input from "../../components/atoms/Input";
 import PageContainer from "../../components/container/PageContainer";
 import axios from "axios";
-import { useDispatch } from "react-redux"
+import { useDispatch } from "react-redux";
 import { setUser, setUserName, setAdmin } from "../../features/loginSlice";
 export default function Login() {
-  const admin = useSelector((state) => state.login.admin)
-  const user = useSelector((state) => state.login.user)
+  const admin = useSelector((state) => state.login.admin);
+  const user = useSelector((state) => state.login.user);
   const [userValue, setUserValue] = useState({ name: "", password: "" });
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleOnChange = (e) => {
@@ -25,8 +25,8 @@ export default function Login() {
   };
 
   const isAdmin = () => {
-    dispatch(setAdmin())
-    navigate("/");
+    dispatch(setAdmin());
+    navigate("/Dashboard");
   };
 
   const isUser = (username, password) => {
@@ -36,14 +36,17 @@ export default function Login() {
         password: password,
       })
       .then((response) => {
-        dispatch(setUser(response.data.token))
-        dispatch(setUserName(username))
+        dispatch(setUser(response.data.token));
+        dispatch(setUserName(username));
         navigate("/");
       });
   };
 
   const login = (e) => {
-    if (userValue.email === "admin@bukapedia.com" && userValue.password === "admin123") {
+    if (
+      userValue.email === "admin@bukapedia.com" &&
+      userValue.password === "admin123"
+    ) {
       isAdmin();
       e.preventDefault();
     } else {
@@ -52,37 +55,35 @@ export default function Login() {
     }
   };
 
-  if(admin || user) {
-    return <Navigate to="/" />
+  if (admin || user) {
+    return <Navigate to="/" />;
   } else {
     return (
       <>
         <PageContainer>
           <div className="flex justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
-            <div className="w-full max-w-md border p-4">
+            <div className="w-full max-w-md border rounded-xl p-6 ">
               <div className="text-center">Login</div>
-              <form>
-                <div>Username</div>
+              <form className="py-5">
                 <Input
                   name="username"
                   type="text"
-                  placeholder="input here"
-                  className="border border-black w-full"
+                  placeholder="Email / Username"
+                  className="block w-full px-3 py-1.5 text-base font-normal   text-gray-700 bg-white  border border-solid border-gray-300 rounded"
                   onChange={handleOnChange}
                   value={userValue.username}
                 />
-  
-                <div>Password</div>
+
                 <Input
                   name="password"
                   type="password"
-                  placeholder="input here"
-                  className="border border-black w-full"
+                  placeholder="Password"
+                  className="block w-full px-3 py-1.5 text-base font-normal  mt-4 text-gray-700 bg-white  border border-solid border-gray-300 rounded"
                   onChange={handleOnChange}
                   value={userValue.password}
                 />
                 <Buttton
-                  className="bg-[#242582] w-full text-white p-2 mt-4"
+                  className="bg-[#242582] w-full text-white p-2 mt-4 rounded"
                   onClick={login}
                 >
                   Login

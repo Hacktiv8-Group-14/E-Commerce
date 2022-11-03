@@ -1,86 +1,84 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineMenu } from "react-icons/ai";
+import {
+  AiOutlineMenu,
+  AiOutlineShoppingCart,
+  AiOutlineHeart,
+} from "react-icons/ai";
 import Logo from "../../atoms/Logo";
-import Buttton from "../../atoms/Buttons";
+import Button from "../../atoms/Buttons";
 import { useSelector, useDispatch } from "react-redux";
-import { removeLogin } from "../../../features/loginSlice";
 import UserProfile from "../../atoms/UserProfile";
 
 function Navbar() {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
-
-  const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.login.user);
   const admin = useSelector((state) => state.login.admin);
   const userName = useSelector((state) => state.login.userName);
+  const cart = useSelector((state) => state.cart.items).find(
+    (item) => item.username === userName
+  )?.cartItems;
+  const user = useSelector((state) => state.login.user);
+  const savedProduct = useSelector((state) => state.saved.savedProducts);
 
   return (
-    <nav className="w-full font-bold text-white bg-[#242582] p-2 sm:p-4 flex justify-between flex-col sm:flex-row fixed z-10 top-0">
-      <div className="flex flex-row justify-between mb-2 sm:mb-0">
-        {/* Nav Brand(?)/Header */}
-        <Logo />
-
-        {/* Button for Expanding Nav Link when Small Screen */}
-        <button
-          className="sm:hidden text-2xl"
-          onClick={() => setIsNavExpanded(!isNavExpanded)}
-        >
-          <AiOutlineMenu />
-        </button>
-      </div>
+    <nav className="w-full font-bold text-white bg-white flex justify-between items-center fixed z-10 top-0  border-b-2 px-2 sm:px-10">
+      <Logo />
 
       {/* Navlink */}
-      <div
-        className={`text-lg sm:text-xl flex-col sm:flex-row sm:items-center ${
-          isNavExpanded ? "flex" : "hidden sm:flex"
-        }`}
-      >
-        {admin ? (
-          <>
-            {/* Admin Navlink */}
-            <Link to="/" onClick={() => setIsNavExpanded(false)}>
-              Home
-            </Link>
-            <Link
-              to="/sales"
-              className="mx-0 sm:mx-16 my-4 sm:my-0"
-              onClick={() => setIsNavExpanded(false)}
-            >
-              Sales Recap
-            </Link>
-          </>
-        ) : (
-          <>
+      <div className="flex items-center py-4 text-black ">
+        <>
+          <div className="flex">
             {/* User Navlink */}
-            <Link
-              to="/Save"
-              className="hover:text-[#F64C72] transition"
-              onClick={() => setIsNavExpanded(false)}
-            >
-              Save
-            </Link>
-            <Link
-              to="/Cart"
-              className="mx-0 sm:mx-16 my-3 sm:my-0 hover:text-[#F64C72] transition"
-              onClick={() => setIsNavExpanded(false)}
-            >
-              Cart
-            </Link>
-          </>
-        )}
+            {user ? (
+              <>
+                <div className="relative">
+                  {savedProduct ? (
+                    <div className="absolute rounded-full -right-1 -top-1 block text-small text-white bg-red-600 px-1">
+                      {savedProduct.length}
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  <Link to="/Save" className="hover:text-[#F64C72] transition">
+                    <AiOutlineHeart
+                      size={30}
+                      className="hover:text-[#242582] text-black"
+                    />
+                  </Link>
+                </div>
 
-        {/* Login/Logout Button */}
-        {!user && !admin ? (
-          <Link to="/login">
-            <Buttton className="border-[#F64C72] hover:border-white border-2 rounded-lg px-5 py-1 text-base sm:text-lg text-[#F64C72] hover:text-white transition">
-              Login
-            </Buttton>
-          </Link>
-        ) : (
-          <UserProfile />
-        )}
+                <div className="relative mx-4">
+                  {cart ? (
+                    <div className="absolute rounded-full -right-1 -top-1 block text-small text-white bg-red-600 px-1">
+                      {cart.length}
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  <Link to="/cart">
+                    <AiOutlineShoppingCart
+                      size={30}
+                      className="hover:text-[#242582] text-black"
+                    />
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* Login/Logout Button */}
+            {!user && !admin ? (
+              <Link to="/login">
+                <Button className="border-[#242582] text-[#242582] border-2 rounded-lg px-5 py-1 text-base sm:text-lg  transition">
+                  Login
+                </Button>
+              </Link>
+            ) : (
+              <UserProfile />
+            )}
+          </div>
+        </>
       </div>
     </nav>
   );

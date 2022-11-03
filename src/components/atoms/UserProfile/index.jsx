@@ -26,7 +26,10 @@ export default function UserProfile() {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(removeLogin());
-        Swal.fire("Successfully logged out", "success");
+        Swal.fire({
+          title: "Sucess Logout",
+          icon: "success",
+        });
       }
     });
   };
@@ -35,17 +38,17 @@ export default function UserProfile() {
     <div className="mr-6">
       <Button onClick={buttonUser} className="">
         <div className="flex items-center">
-          <div className="bg-black p-1 px-4 rounded-full mr-3">
+          <div className="bg-[#242582] text-white px-3.5 p-1 rounded-full mr-3">
             {admin ? "A" : userName.charAt(0).toUpperCase()}
           </div>
-          <div className="">{admin ? "Admin" : userName}</div>
+          <div className="text-[#242582]">{admin ? "Admin" : userName}</div>
         </div>
       </Button>
 
       {logout && (
         <div>
           <Button
-            className="absolute bg-black text mr-12 p-2 mt-2 text-base px-4 rounded-lg "
+            className="absolute bg-[#242582] text-white mr-12 p-2 mt-2 text-base px-4 rounded-lg "
             onClick={Logout}
           >
             <div className="flex items-center">
