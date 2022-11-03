@@ -1,6 +1,6 @@
 export default function BottomBarContainer({children}){
     return(
-        <div className="fixed bottom-0 bg-[#242582] w-4/5 sm:w-1/2 text-white p-2 sm:p-4 rounded-t-lg">
+        <div className="sticky bottom-0 w-full text-white flex justify-center">
             {children}
         </div>
     )

@@ -8,7 +8,7 @@ import logo from "../../../Asset/img/LogoIcon.png";
 
 export default function Footer() {
   return (
-    <footer className="p-4 bg-white border-t  dark:bg-gray-900">
+    <footer className="p-4 bg-white  dark:bg-gray-900">
       <div className="flex flex-wrap sm:justify-between sm:px-24 flex-col sm:flex-row ">
         <div className="w-44 pb-8">
           <img src={logo} />

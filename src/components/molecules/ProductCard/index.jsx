@@ -8,7 +8,7 @@ export default function ProductCard(props) {
     <>
       <div className=" border rounded-xl mb-3 md:mb-0 flex flex-col text-black">
         {/* product soldout */}
-        {product.stock === 0 ? (
+        {product?.stock === 0 ? (
           <div className="relative">
             <div className="absolute left-0 top-0 bg-red-600 px-3 text-white rounded-br-lg rounded-tl-lg">
               Sold Out

@@ -9,7 +9,7 @@ export default function CategoryNav({ category, setCategory, categories }) {
       <div className="mt-2 text-end md:text-start">
         {/* Button for Expanding Category Nav When Small Screen */}
         <button
-          className="sm:hidden text-xl"
+          className="sm:hidden text-xl mt-2"
           onClick={() => setIsCategoryExpanded(!isCategoryExpanded)}
         >
           <BiCategory />

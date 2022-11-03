@@ -39,7 +39,7 @@ export default function RecapPage() {
         />
       ))}
       <BottomBarContainer>
-        <div className="flex justify-center sm:gap-10 items-center">
+        <div className="flex justify-center items-center bg-[#242582] w-4/5 p-2 sm:p-4 rounded-t-lg">
           <div className="text-xl sm:text-2xl">
             Total sales: <b>US$ {totalSold}</b>
           </div>
