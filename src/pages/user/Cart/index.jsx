@@ -1,5 +1,4 @@
 import PageContainer from "../../../components/container/PageContainer";
-import Header from "../../../components/molecules/Header/index.";
 import { RowContainer } from "../../../components/container/RowContainer";
 import ProductRow from "../../../components/molecules/ProductRow";
 import { useState, useEffect } from "react";
@@ -22,11 +21,6 @@ export default function Cart() {
   const cart = useSelector((state) => state.cart.items).find(
     (item) => item.username === userName
   )?.cartItems;
-  // const [cart, setCart] = useState(null)
-
-  // useEffect(() => {
-  //   setCart(userCartItem?.cartItems.find(item => item.id === Number(id)))
-  // }, [userCartItem]);
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [checkedItems, setCheckedItems] = useState([]);
@@ -74,7 +68,6 @@ export default function Cart() {
             { url: "/cart", name: "Shoping Cart" },
           ]}
         />
-        <Header>Cart</Header>
         {cart?.length ? (
           <>
             <RowContainer>
@@ -103,7 +96,7 @@ export default function Cart() {
                 </div>
                 <Button
                   disabled={checkedItems.length === 0 ? true : false}
-                  className="font-bold text-sm sm:text-lg border-2 border-[#F64C72] hover:border-white disabled:border-[#F64C72]/50 p-2 rounded-lg text-[#F64C72] hover:text-white disabled:text-[#F64C72]/50 transition"
+                  className="font-bold text-sm sm:text-lg border-2 border-white hover:border-white disabled:border-white/50 p-2 rounded-lg text-white hover:text-white disabled:text-white/50 transition"
                   onClick={onClickCheckout}
                 >
                   Checkout

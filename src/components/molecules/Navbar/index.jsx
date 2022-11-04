@@ -1,17 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  AiOutlineMenu,
-  AiOutlineShoppingCart,
-  AiOutlineHeart,
-} from "react-icons/ai";
+import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import Logo from "../../atoms/Logo";
 import Button from "../../atoms/Buttons";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import UserProfile from "../../atoms/UserProfile";
 
 function Navbar() {
-  const [isNavExpanded, setIsNavExpanded] = useState(false);
   const admin = useSelector((state) => state.login.admin);
   const userName = useSelector((state) => state.login.userName);
   const cart = useSelector((state) => state.cart.items).find(
@@ -30,7 +25,7 @@ function Navbar() {
           <div className="flex">
             {/* User Navlink */}
             {user ? (
-              <>
+              <div className="flex border-r-2 border-gray-300 mr-5">
                 <div className="relative">
                   {savedProduct.length ? (
                     <div className="absolute rounded-full -right-1 -top-1 block text-small text-white bg-red-600 px-1">
@@ -39,7 +34,7 @@ function Navbar() {
                   ) : (
                     <></>
                   )}
-                  <Link to="/Save" className="hover:text-[#F64C72] transition">
+                  <Link to="/Save" className=" transition">
                     <AiOutlineHeart
                       size={30}
                       className="hover:text-[#242582] text-black"
@@ -62,7 +57,7 @@ function Navbar() {
                     />
                   </Link>
                 </div>
-              </>
+              </div>
             ) : (
               <></>
             )}

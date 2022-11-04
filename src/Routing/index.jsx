@@ -6,6 +6,7 @@ import SavedPage from "../pages/user/SavedPage";
 import RecapPage from "../pages/admin/RecapPage";
 import Dashboard from "../pages/admin/Dashboard";
 import StockUpdate from "../pages/admin/StockUpdate";
+import Error from "../pages/Error";
 
 export const routes = [
   {
@@ -40,10 +41,10 @@ export const routes = [
     path: "/Stock-update",
     element: StockUpdate,
   },
-  // {
-  //   path: "/admin",
-  //   element: Admin,
-  // },
+  {
+    path: "*",
+    element: Error,
+  },
 ];
 
 export default {

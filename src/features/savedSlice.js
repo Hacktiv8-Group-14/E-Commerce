@@ -20,11 +20,9 @@ const savedSlice = createSlice({
       );
     },
     deleteSavedProducts: (state, action) => {
-      const filter = state.savedProducts.filter(
-        (id) => id !== action.payload
-      );
+      const filter = state.savedProducts.filter((id) => id !== action.payload);
       state.savedProducts = [...filter];
-      localStorage.setItem("SavedProducts", JSON.stringify(filter));
+      localStorage.removeItem("savedProducts", JSON.stringify(filter));
     },
   },
 });
