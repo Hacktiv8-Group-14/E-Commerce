@@ -28,7 +28,7 @@ export default function RecapPage() {
           { url: "/sales", name: "Sales Recap" },
         ]}
       />
-      <div></div>
+      <div ></div>
       {products?.map((item, index) => (
         <CardProduct
           index={index}

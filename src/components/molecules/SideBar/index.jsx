@@ -74,7 +74,7 @@ export default function SideBar({ className }) {
           </NavLink>
           <Button
             onClick={Logout}
-            className="border-y py-5 mt-24 hover:bg-[#242582] hover:text-white"
+            className="border-y py-5 mt-24 hover:bg-[#242582] hover:text-white transition"
           >
             <div className="flex items-center justify-center">
               <FiLogOut size={25} />

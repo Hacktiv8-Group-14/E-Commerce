@@ -32,6 +32,13 @@ const productSlice = createSlice({
                 }
             })
         },
+        changeStock: (state, action) => {
+            state.products.forEach((product) => {
+                if(product.id === action.payload.id){
+                    product.stock = action.payload.stock
+                }
+            })
+        }
     },
     extraReducers(builder){
         builder
@@ -60,5 +67,5 @@ const productSlice = createSlice({
         })
     }
 })
-export const { soldProduct } = productSlice.actions
+export const { soldProduct, changeStock } = productSlice.actions
 export default productSlice.reducer

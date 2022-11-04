@@ -1,8 +1,12 @@
-import Button from "../../../components/atoms/Buttons";
 import Breadcrumb from "../../../components/molecules/Breadcrumb";
 import AdminContainer from "../../../components/container/adminContainer";
+import CardProduct from "../../../components/molecules/Admin/CardProduct";
+import { useSelector } from "react-redux";
 
 export default function StockUpdate() {
+
+  const products = useSelector((state) => state.products.products)
+
   return (
     <>
       <AdminContainer>
@@ -12,7 +16,17 @@ export default function StockUpdate() {
             { url: "/Dashboard", name: "Stock Update" },
           ]}
         />
-        <div className="w-full flex justify-between items-center border-2 rounded-lg p-4">
+        {products.map((item) => (
+          <CardProduct 
+            id={item.id}
+            image={item.image}
+            title={item.title}
+            price={item.price}
+            stock={item.stock}
+            updButton={true}
+          />
+        ))}
+        {/* <div className="w-full flex justify-between items-center border-2 rounded-lg p-4">
           <div className="flex items-center p-2 gap-4 sm:gap-8">
             <img
               src={"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"}
@@ -20,11 +34,9 @@ export default function StockUpdate() {
               className="h-12 sm:h-24 w-12 sm:w-24"
             />
             <div className="flex flex-col">
-              {/* nama produk */}
               <div className="text-sm sm:text-xl line-clamp-1">
                 product title
               </div>
-              {/* harga produk */}
               <div className="font-medium text-sm sm:text-xl">US$ xxx</div>
               <div className="text-red-700  text-xs sm:text-lg ">
                 Remaining stock: x
@@ -40,7 +52,7 @@ export default function StockUpdate() {
               Update
             </Button>
           </div>
-        </div>
+        </div> */}
       </AdminContainer>
     </>
   );
