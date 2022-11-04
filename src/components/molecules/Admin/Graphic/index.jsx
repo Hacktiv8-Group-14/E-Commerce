@@ -10,7 +10,6 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-const { faker } = require("@faker-js/faker");
 
 const labels = ["January", "February", "March", "April", "May", "June", "July"];
 const data1 = [0, 10, 5, 2, 20, 30, 45];
@@ -45,7 +44,7 @@ export default function Graphic() {
       },
       title: {
         display: true,
-        text: "Chart.js Line Chart",
+        text: "",
       },
     },
   };
@@ -62,7 +61,7 @@ export default function Graphic() {
       {
         label: "Product Terjual",
         data: dataset.data2,
-        borderColor: "rgb(53, 162, 235)",
+        borderColor: "#242582",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
