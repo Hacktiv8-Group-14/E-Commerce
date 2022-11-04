@@ -24,11 +24,11 @@ export default function RecapPage() {
     <AdminContainer>
       <Breadcrumb
         list={[
-          { url: "/", name: "Admin" },
+          { url: "/Dashboard", name: "Admin" },
           { url: "/sales", name: "Sales Recap" },
         ]}
       />
-      <div ></div>
+      <div></div>
       {products?.map((item, index) => (
         <CardProduct
           index={index}

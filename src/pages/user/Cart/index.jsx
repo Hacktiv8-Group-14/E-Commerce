@@ -77,39 +77,39 @@ export default function Cart() {
         <Header>Cart</Header>
         {cart?.length ? (
           <>
-          <RowContainer>
-            {cart?.map((item) => {
-              product = products?.find((product) => product.id === item.id);
-              return (
-                <ProductRow
-                  key={item?.id}
-                  id={item?.id}
-                  img={product?.image}
-                  title={product?.title}
-                  price={product?.price}
-                  stock={product?.stock}
-                  isChecked={item?.isChecked}
-                  totalItem={item?.total}
-                  userName={userName}
-                />
-              );
-            })}
-          </RowContainer>
-          {/* buat nampilin total harga yang dicheck sm tombol checkout */}
-          <BottomBarContainer>
-            <div className="flex bg-[#242582] w-4/5 justify-between p-2 sm:p-4 rounded-t-lg items-center">
-              <div className="text-base sm:text-xl">
-                Total: <b>US$ {totalPrice}</b>
+            <RowContainer>
+              {cart?.map((item) => {
+                product = products?.find((product) => product.id === item.id);
+                return (
+                  <ProductRow
+                    key={item?.id}
+                    id={item?.id}
+                    img={product?.image}
+                    title={product?.title}
+                    price={product?.price}
+                    stock={product?.stock}
+                    isChecked={item?.isChecked}
+                    totalItem={item?.total}
+                    userName={userName}
+                  />
+                );
+              })}
+            </RowContainer>
+            {/* buat nampilin total harga yang dicheck sm tombol checkout */}
+            <BottomBarContainer>
+              <div className="flex bg-[#242582] w-4/5 justify-between p-2 sm:p-4 rounded-t-lg items-center">
+                <div className="text-base sm:text-xl">
+                  Total: <b>US$ {totalPrice}</b>
+                </div>
+                <Button
+                  disabled={checkedItems.length === 0 ? true : false}
+                  className="font-bold text-sm sm:text-lg border-2 border-[#F64C72] hover:border-white disabled:border-[#F64C72]/50 p-2 rounded-lg text-[#F64C72] hover:text-white disabled:text-[#F64C72]/50 transition"
+                  onClick={onClickCheckout}
+                >
+                  Checkout
+                </Button>
               </div>
-              <Button
-                disabled={checkedItems.length === 0 ? true : false}
-                className="font-bold text-sm sm:text-lg border-2 border-[#F64C72] hover:border-white disabled:border-[#F64C72]/50 p-2 rounded-lg text-[#F64C72] hover:text-white disabled:text-[#F64C72]/50 transition"
-                onClick={onClickCheckout}
-              >
-                Checkout
-              </Button>
-            </div>
-          </BottomBarContainer>
+            </BottomBarContainer>
           </>
         ) : (
           <div className="text-lg text-center py-20 ">

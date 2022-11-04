@@ -32,7 +32,7 @@ function Navbar() {
             {user ? (
               <>
                 <div className="relative">
-                  {savedProduct ? (
+                  {savedProduct.length ? (
                     <div className="absolute rounded-full -right-1 -top-1 block text-small text-white bg-red-600 px-1">
                       {savedProduct.length}
                     </div>
