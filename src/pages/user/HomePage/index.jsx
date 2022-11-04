@@ -4,7 +4,7 @@ import CategoryNav from "../../../components/molecules/CategoryNav";
 import ProductCard from "../../../components/molecules/ProductCard";
 import PageContainer from "../../../components/container/PageContainer";
 import CardContainer from "../../../components/container/CardContainer";
-import Admin from "../../admin/StockUpdate";
+import { Navigate } from "react-router-dom";
 
 export default function Homepage() {
   const categories = useSelector((state) => state.products.categories);
@@ -24,7 +24,7 @@ export default function Homepage() {
   }, [category, products]);
 
   if (admin) {
-    return <Admin />;
+    return <Navigate to="/Dashboard" />
   } else {
     return (
       <PageContainer>

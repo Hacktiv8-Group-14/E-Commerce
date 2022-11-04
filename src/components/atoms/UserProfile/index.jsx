@@ -27,7 +27,7 @@ export default function UserProfile() {
       if (result.isConfirmed) {
         dispatch(removeLogin());
         Swal.fire({
-          title: "Sucess Logout",
+          title: "Sucessfully Logged out",
           icon: "success",
         });
       }

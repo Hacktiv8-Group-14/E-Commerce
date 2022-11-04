@@ -4,9 +4,11 @@ import Breadcrumb from "../../../components/molecules/Breadcrumb";
 import { FaChartLine } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 export default function Dashboard() {
   const products = useSelector((state) => state.products.products);
+  const admin = useSelector((state) => state.login.admin)
 
   const [totalSold, setTotalSold] = useState(0);
 
@@ -21,30 +23,33 @@ export default function Dashboard() {
     setTotal();
   }, []);
 
-  return (
-    <>
-      <AdminContainer>
-        <Breadcrumb
-          list={[
-            { url: "/", name: "Admin" },
-            { url: "/Dashboard", name: "Dashboard" },
-          ]}
-        />
-        <div className="flex md:flex-row flex-col">
-          <CardSales
-            title="Sales"
-            rating="55%"
-            total="2"
-            icon={<FaChartLine color="white" size={30} />}
+  if(admin) {
+    return (
+      <>
+        <AdminContainer>
+          <Breadcrumb
+            list={[
+              { url: "/Dashboard", name: "Admin" },
+            ]}
           />
-          <CardSales
-            title="Money"
-            rating="55%"
-            total={`$ ${totalSold}`}
-            icon={<FaChartLine color="white" size={30} />}
-          />
-        </div>
-      </AdminContainer>
-    </>
-  );
+          <div className="flex md:flex-row flex-col">
+            <CardSales
+              title="Sales"
+              rating="55%"
+              total="2"
+              icon={<FaChartLine color="white" size={30} />}
+            />
+            <CardSales
+              title="Money"
+              rating="55%"
+              total={`$ ${totalSold}`}
+              icon={<FaChartLine color="white" size={30} />}
+            />
+          </div>
+        </AdminContainer>
+      </>
+    )
+  } else{
+    return <Navigate to="/" />
+  }
 }
