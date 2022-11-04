@@ -10,7 +10,10 @@ import { setUser, setUserName, setAdmin } from "../../features/loginSlice";
 export default function Login() {
   const admin = useSelector((state) => state.login.admin);
   const user = useSelector((state) => state.login.user);
+
   const [userValue, setUserValue] = useState({ name: "", password: "" });
+  const [loading, setLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,8 +28,11 @@ export default function Login() {
   };
 
   const isAdmin = () => {
-    dispatch(setAdmin());
-    navigate("/Dashboard");
+    setTimeout(() => {
+      dispatch(setAdmin());
+      navigate("/Dashboard");
+      setLoading(false)
+    }, 500);
   };
 
   const isUser = (username, password) => {
@@ -39,10 +45,18 @@ export default function Login() {
         dispatch(setUser(response.data.token));
         dispatch(setUserName(username));
         navigate("/");
-      });
+        setLoading(false)
+        setErrorMessage('')
+      })
+      .catch((e) => {
+        setLoading(false)
+        setErrorMessage(e.response.data);
+      })
   };
 
   const login = (e) => {
+    setErrorMessage('')
+    setLoading(true)
     if (
       userValue.email === "admin@bukapedia.com" &&
       userValue.password === "admin123"
@@ -63,13 +77,14 @@ export default function Login() {
         <PageContainer>
           <div className="flex justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md border rounded-xl p-6 ">
-              <div className="text-center">Login</div>
+              <div className="text-center text-2xl font-medium">Login with Bukapedia Account</div>
               <form className="py-5">
+                <div className=" text-red-500 ml-1 mb-2 text-sm font-medium">{errorMessage}</div>
                 <Input
                   name="username"
                   type="text"
-                  placeholder="Email / Username"
-                  className="block w-full px-3 py-1.5 text-base font-normal   text-gray-700 bg-white  border border-solid border-gray-300 rounded"
+                  placeholder="Username"
+                  className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white  border border-solid border-gray-300 rounded"
                   onChange={handleOnChange}
                   value={userValue.username}
                 />
@@ -83,10 +98,11 @@ export default function Login() {
                   value={userValue.password}
                 />
                 <Buttton
-                  className="bg-[#242582] w-full text-white p-2 mt-4 rounded"
+                  className="bg-[#242582] disabled:bg-[#242582]/50 w-full text-white p-2 mt-4 rounded"
                   onClick={login}
+                  disabled={loading || (!userValue.name && !userValue.password)}
                 >
-                  Login
+                  {loading ? 'Logging in...' : 'Login'}
                 </Buttton>
               </form>
             </div>

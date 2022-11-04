@@ -33,7 +33,7 @@ export default function SideBar({ className }) {
       if (result.isConfirmed) {
         dispatch(removeLogin());
         Swal.fire({
-          title: "Sucess Logout",
+          title: "Sucessfully Logged out",
           icon: "success",
         });
         navigate("/");
