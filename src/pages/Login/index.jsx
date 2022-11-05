@@ -13,7 +13,7 @@ export default function Login() {
   const admin = useSelector((state) => state.login.admin);
   const user = useSelector((state) => state.login.user);
 
-  const [userValue, setUserValue] = useState({ name: "", password: "" });
+  const [userValue, setUserValue] = useState({ username: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [typePassword, setTypePassword] = useState("password");
@@ -32,11 +32,15 @@ export default function Login() {
   const handleOnChange = (e) => {
     const name = e.target.name;
     if (name === "username") {
-      setUserValue({ ...userValue, email: e.target.value });
+      setUserValue({ ...userValue, username: e.target.value });
     } else if (name === "password") {
       setUserValue({ ...userValue, password: e.target.value });
     }
   };
+
+  useEffect(() => {
+    console.log(userValue);
+  }, [userValue]);
 
   const isAdmin = () => {
     setTimeout(() => {
@@ -69,13 +73,13 @@ export default function Login() {
     setErrorMessage("");
     setLoading(true);
     if (
-      userValue.email === "admin@bukapedia.com" &&
+      userValue.username === "admin@bukapedia.com" &&
       userValue.password === "admin123"
     ) {
       isAdmin();
       e.preventDefault();
     } else {
-      isUser(userValue.email, userValue.password);
+      isUser(userValue.username, userValue.password);
       e.preventDefault();
     }
   };
@@ -124,7 +128,7 @@ export default function Login() {
                 <Buttton
                   className="bg-[#242582] disabled:bg-[#242582]/50 w-full text-white p-2 mt-4 rounded"
                   onClick={login}
-                  disabled={loading || (!userValue.name && !userValue.password)}
+                  disabled={loading || !userValue.username || !userValue.password}
                 >
                   {loading ? "Logging in..." : "Login"}
                 </Buttton>
