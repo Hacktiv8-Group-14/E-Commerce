@@ -7,15 +7,14 @@ import { Link } from "react-router-dom";
 import Breadcrumb from "../../../components/molecules/Breadcrumb";
 
 export default function SavedPage() {
-  const savedProduct = useSelector((state) => state.saved.savedProducts);
   const products = useSelector((state) => state.products.products);
-  const admin = useSelector((state) => state.login.admin);
+  const user = useSelector((state) => state.login.user);
+  const username = useSelector((state) => state.login.userName);
+  const savedProduct = useSelector((state) => state.saved.savedProducts[username]);
 
   let product = {};
 
-  if (admin) {
-    return <Navigate to="/" />;
-  } else {
+  if (user) {
     return (
       <>
         <PageContainer>
@@ -25,7 +24,7 @@ export default function SavedPage() {
               { url: "/save", name: "Saved" },
             ]}
           />
-          {savedProduct.length ? (
+          {savedProduct?.length ? (
             <CardContainer>
               {savedProduct?.map((id) => {
                 product = products?.find((i) => i.id === id);
@@ -52,5 +51,7 @@ export default function SavedPage() {
         </PageContainer>
       </>
     );
+  } else {
+    return <Navigate to="/" />;
   }
 }

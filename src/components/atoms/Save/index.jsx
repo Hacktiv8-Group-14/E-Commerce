@@ -12,20 +12,21 @@ import { useNavigate } from "react-router-dom";
 export default function Save(props) {
   const { product } = props;
   const dispatch = useDispatch();
-  const savedProduct = useSelector((state) => state.saved.savedProducts);
+  const username = useSelector(state => state.login.userName)
+  const savedProduct = useSelector((state) => state.saved.savedProducts[username]);
   const user = useSelector(state => state.login.user)
   const [save, setSave] = useState(false);
 
   useEffect(() => {
-    savedProduct.find((id) => id === product?.id) && setSave(true);
+    savedProduct?.find((id) => id === product?.id) && setSave(true);
   }, [save]);
 
   const Saved = () => {
     if (save === false) {
-      dispatch(addSavedProducts(product?.id));
+      dispatch(addSavedProducts({username: username, id: product?.id}));
       setSave(!save);
     } else if (save === true) {
-      dispatch(deleteSavedProducts(product?.id));
+      dispatch(deleteSavedProducts({username: username, id: product?.id}));
       setSave(false);
     }
   };

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import Logo from "../../atoms/Logo";
@@ -13,7 +12,7 @@ function Navbar() {
     (item) => item.username === userName
   )?.cartItems;
   const user = useSelector((state) => state.login.user);
-  const savedProduct = useSelector((state) => state.saved.savedProducts);
+  const savedProduct = useSelector((state) => state.saved.savedProducts[userName]);
 
   return (
     <nav className="w-full font-bold text-white bg-white flex justify-between items-center fixed z-10 top-0  border-b-2 px-2 sm:px-10">
@@ -27,9 +26,9 @@ function Navbar() {
             {user ? (
               <div className="flex border-r-2 border-gray-300 mr-5">
                 <div className="relative">
-                  {savedProduct.length ? (
+                  {savedProduct?.length ? (
                     <div className="absolute rounded-full -right-1 -top-1 block text-small text-white bg-red-600 px-1">
-                      {savedProduct.length}
+                      {savedProduct?.length}
                     </div>
                   ) : (
                     <></>
