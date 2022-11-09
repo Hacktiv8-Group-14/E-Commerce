@@ -6,9 +6,7 @@ import { useSelector } from "react-redux";
 export default function Quantity(props) {
   const { minClick, plusClick, quantity, stock, className } = props;
   const userName = useSelector((state) => state.login.userName);
-  const cart = useSelector((state) => state.cart.items).find(
-    (item) => item.username === userName
-  )?.cartItems;
+  const cart = useSelector((state) => state.cart.items[userName])
 
   const [disable, setDisable] = useState(false);
   const [plusDisable, setPlusDisable] = useState(false);

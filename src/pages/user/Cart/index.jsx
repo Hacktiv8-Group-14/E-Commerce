@@ -18,9 +18,7 @@ export default function Cart() {
   const userName = useSelector((state) => state.login.userName);
   const products = useSelector((state) => state.products.products);
   const user = useSelector((state) => state.login.user);
-  const cart = useSelector((state) => state.cart.items).find(
-    (item) => item.username === userName
-  )?.cartItems;
+  const cart = useSelector((state) => state.cart.items[userName]);
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [checkedItems, setCheckedItems] = useState([]);

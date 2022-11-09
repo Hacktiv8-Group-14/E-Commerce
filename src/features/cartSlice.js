@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-    items: [],
+    items: {},
 }
 
 const cartSlice = createSlice({
@@ -10,76 +10,59 @@ const cartSlice = createSlice({
     reducers:{
         // action.payload = {id, username}
         addCart: (state, action) => {
-            let isNotFirstUser = state.items.some(item => item.username === action.payload.username)
-
+            let isNotFirstUser = state.items[action.payload.username] ? true : false
             if(isNotFirstUser){
-                let userIndex = state.items.findIndex(item => item.username === action.payload.username)
                 let toggle = false
-                state.items[userIndex].cartItems.forEach(item => {
+                state.items[action.payload.username].forEach(item => {
                     if(item.id === action.payload.id){
                         item.total += 1
                         toggle = true
                     }
                 })
                 if(!toggle){
-                    state.items[userIndex].cartItems = [
-                        ...state.items[userIndex].cartItems, 
+                    state.items[action.payload.username] = [
+                        ...state.items[action.payload.username], 
                         {
-                            id: action.payload.id, 
-                            total: 1, 
+                            id: action.payload.id,
+                            total: 1,
                             isChecked: false
                         }
                     ]
                 }
             } else{
-                state.items = [
-                    ...state.items, 
-                    {
-                        username: action.payload.username, 
-                        cartItems: [{
-                            id: action.payload.id, 
-                            total: 1, 
-                            isChecked: false
-                        }]
-                    }
-                ]
+                state.items[action.payload.username] = [{
+                    id: action.payload.id, 
+                    total: 1, 
+                    isChecked: false
+                }]
             }
         },
         minCart: (state, action) => {
-            let userIndex = state.items.findIndex(item => item.username === action.payload.username)
-            state.items[userIndex].cartItems.forEach(item => {
+            state.items[action.payload.username].forEach(item => {
                 if(item.id === action.payload.id){
                     item.total -= 1
                 }
             })
-            const filterCartItems = state.items[userIndex].cartItems.filter(item => item.total !== 0)
-            state.items[userIndex].cartItems = [...filterCartItems]
-            const filterUser = state.items.filter(item => item.cartItems.length > 0)
-            state.items = [...filterUser]
+            const filterCartItems = state.items[action.payload.username].filter(item => item.total !== 0)
+            state.items[action.payload.username] = filterCartItems
+            if(state.items[action.payload.username].length === 0) {
+                delete state.items[action.payload.username]
+            }
         },
         changeIsChecked: (state, action) => {
-            let userIndex = state.items.findIndex(item => item.username === action.payload.username)
-            state.items[userIndex].cartItems.forEach((item) => {
+            state.items[action.payload.username].forEach((item) => {
                 if(item.id === action.payload.id){
                     item.isChecked = !item.isChecked
                 }
             })
         },
         deleteItem: (state, action) => {
-            let userIndex = state.items.findIndex(item => item.username === action.payload.username)
-            const filterCartItems = state.items[userIndex].cartItems.filter((item) => item.id !== action.payload.id)
-            state.items[userIndex].cartItems = [...filterCartItems]
-            const filterUser = state.items.filter(item => item.cartItems.length > 0)
-            state.items = [...filterUser]
+            const filterCartItems = state.items[action.payload.username].filter((item) => item.id !== action.payload.id)
+            state.items[action.payload.username] = filterCartItems
+            if(state.items[action.payload.username].length === 0) {
+                delete state.items[action.payload.username]
+            }
         },
-        // action.payload = {id: , total: }
-        // changeItemTotalBy: (state, action) => {
-        //     state.items.forEach(item => {
-        //         if(item.id === action.payload.id){
-        //             item.total = action.payload.total
-        //         }
-        //     })
-        // }
     }
 })
 

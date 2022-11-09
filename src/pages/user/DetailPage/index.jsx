@@ -21,9 +21,7 @@ export default function DetailPage() {
   const admin = useSelector((state) => state.login.admin);
   const userName = useSelector((state) => state.login.userName);
   const products = useSelector((state) => state.products.products);
-  const userCartItem = useSelector((state) => state.cart.items).find(
-    (item) => item.username === userName
-  )?.cartItems;
+  const userCartItem = useSelector((state) => state.cart.items[userName])
   const cartItem = userCartItem?.find((item) => item.id === Number(id));
   const product = products?.find((item) => item.id === Number(id));
 

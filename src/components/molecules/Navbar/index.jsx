@@ -8,9 +8,7 @@ import UserProfile from "../../atoms/UserProfile";
 function Navbar() {
   const admin = useSelector((state) => state.login.admin);
   const userName = useSelector((state) => state.login.userName);
-  const cart = useSelector((state) => state.cart.items).find(
-    (item) => item.username === userName
-  )?.cartItems;
+  const cart = useSelector((state) => state.cart.items[userName])
   const user = useSelector((state) => state.login.user);
   const savedProduct = useSelector((state) => state.saved.savedProducts[userName]);
 
