@@ -92,7 +92,7 @@ export default function ProductRow({
             {/* harga produk */}
             <div className="font-medium text-sm sm:text-xl">US$ {price}</div>
             <div className="text-red-700  text-xs sm:text-lg ">
-              Stock tersisa : {stock}
+              Remaining stock : {stock}
             </div>
           </div>
         </Link>

@@ -58,11 +58,11 @@ export default function DetailPage() {
                   {product?.title}
                 </div>
                 <div className="flex mt-2">
-                  <div>{`Terjual ${product?.productSold}`}</div>
+                  <div>{`${product?.productSold} sold`}</div>
                   <div className="ml-5 flex items-center">
                     <AiFillStar className="text-amber-500" />
                     <div className="mr-2">{product?.rating.rate}</div>
-                    <div>{`(${product?.rating.count} ulasan)`}</div>
+                    <div>{`(${product?.rating.count} review)`}</div>
                   </div>
                 </div>
                 <div className=" my-4 font-medium text-[#242582] text-3xl flex items-center">

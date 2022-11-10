@@ -19,8 +19,8 @@ export default function Footer() {
               Bukapedia
             </h2>
             <ul className="text-gray-600 dark:text-gray-400">
-              <li className="mb-4">Tentang Bukapedia</li>
-              <li className="mb-4">Hak Kekayaan Intelektual</li>
+              <li className="mb-4">About Bukapedia</li>
+              <li className="mb-4">Intellectual Property</li>
               <li className="mb-4">Blog</li>
             </ul>
           </div>
@@ -37,7 +37,7 @@ export default function Footer() {
                 <Link to="/">Electronics</Link>
               </li>
               <li className="mb-4">
-                <Link to="/">Jawelery</Link>
+                <Link to="/">Jewelery</Link>
               </li>
               <li className="mb-4">
                 <Link to="/">Men's Clothing</Link>
@@ -49,13 +49,13 @@ export default function Footer() {
           </div>
 
           <div className="lg:ml-6">
-            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-              Bantuan dan Panduan
+            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
+              Help
             </h2>
-            <ul>
+            <ul className="text-gray-600 dark:text-gray-400">
               <li className="mb-4">Bukapedia Care</li>
-              <li className="mb-4">Syarat dan Ketentuan</li>
-              <li className="mb-4">Mitra</li>
+              <li className="mb-4">Terms and Conditions</li>
+              <li className="mb-4">Partner</li>
             </ul>
           </div>
         </div>

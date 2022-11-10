@@ -48,7 +48,7 @@ export default function CardProduct({
           {typeof stock !== "undefined" && (
             <input
               type="number"
-              className="border-2 text-center sm:text-lg w-10 sm:w-20"
+              className="border-2 text-center sm:text-lg w-10 sm:w-20 rounded-lg"
               value={stockValue}
               onChange={(event) => setStockValue(Number(event.target.value))}
             />

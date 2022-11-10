@@ -59,7 +59,7 @@ export default function Graphic() {
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
-        label: "Product Terjual",
+        label: "Products Sold",
         data: dataset.data2,
         borderColor: "#242582",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
@@ -68,7 +68,7 @@ export default function Graphic() {
   };
 
   return (
-    <div id="graphic" className="w-full">
+    <div id="graphic" className="w-full mb-10">
       <Line options={options} data={data} />
     </div>
   );

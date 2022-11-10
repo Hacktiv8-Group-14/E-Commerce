@@ -35,7 +35,7 @@ export default function SavedPage() {
             <>
               <div className=" text-center py-20 ">
                 <div className="text-xl">
-                  It seem's you haven't saved any searches yet
+                  It seem's you haven't saved any product yet
                 </div>
                 <div className="mt-4">
                   <Link
