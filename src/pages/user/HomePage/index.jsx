@@ -6,6 +6,7 @@ import PageContainer from "../../../components/container/PageContainer";
 import CardContainer from "../../../components/container/CardContainer";
 import { Navigate } from "react-router-dom";
 import Poster from "./Parts/Poster/Poster";
+import Recomended from "./Parts/Recomended";
 
 export default function Homepage() {
   const categories = useSelector((state) => state.products.categories);
@@ -30,6 +31,7 @@ export default function Homepage() {
     return (
       <PageContainer>
         <Poster />
+
         <CategoryNav
           categories={categories}
           category={category}
@@ -40,6 +42,7 @@ export default function Homepage() {
             <ProductCard key={product.id} product={product} />
           ))}
         </CardContainer>
+        <Recomended />
       </PageContainer>
     );
   }

@@ -126,9 +126,11 @@ export default function Login() {
                   </div>
                 </div>
                 <Buttton
-                  className="bg-[#242582] disabled:bg-[#242582]/50 w-full text-white p-2 mt-4 rounded"
+                  className="bg-bluedark disabled:bg-bluedark/50 w-full text-white p-2 mt-4 rounded"
                   onClick={login}
-                  disabled={loading || !userValue.username || !userValue.password}
+                  disabled={
+                    loading || !userValue.username || !userValue.password
+                  }
                 >
                   {loading ? "Logging in..." : "Login"}
                 </Buttton>

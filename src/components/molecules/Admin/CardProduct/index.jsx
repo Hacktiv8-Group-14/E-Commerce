@@ -11,16 +11,15 @@ export default function CardProduct({
   price,
   productSold,
   stock,
-  updButton
+  updButton,
 }) {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  const [stockValue, setStockValue] = useState(stock)
+  const [stockValue, setStockValue] = useState(stock);
 
   const onUpdate = () => {
-    dispatch(changeStock({id: id, stock: Number(stockValue)}))
-  }
+    dispatch(changeStock({ id: id, stock: Number(stockValue) }));
+  };
 
   return (
     <>
@@ -54,18 +53,24 @@ export default function CardProduct({
             />
           )}
           {updButton && (
-            <Button disabled={stockValue === stock || stockValue === '' ? true : false} className="bg-[#242582] disabled:bg-[#242582]/50 text-white p-1 sm:p-2 rounded-lg" onClick={onUpdate}>
+            <Button
+              disabled={
+                stockValue === stock || stockValue === "" ? true : false
+              }
+              className="bg-bluedark disabled:bg-bluedark/50 text-white p-1 sm:p-2 rounded-lg"
+              onClick={onUpdate}
+            >
               Update
             </Button>
           )}
           {typeof productSold !== "undefined" && (
             <>
-            <div className="text-sm sm:text-xl font-medium">
-              {productSold} sold
-            </div>
-            <div className="text-sm sm:text-xl">
-              Total: <b>US$ {price * productSold}</b>
-            </div>
+              <div className="text-sm sm:text-xl font-medium">
+                {productSold} sold
+              </div>
+              <div className="text-sm sm:text-xl">
+                Total: <b>US$ {price * productSold}</b>
+              </div>
             </>
           )}
         </div>

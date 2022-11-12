@@ -68,7 +68,7 @@ export default function DetailPage() {
                 <div className=" my-4 font-medium text-bluedark text-3xl flex items-center">
                   $ {product?.price}
                   <div className="mx-2 text-lg text-[#a32929] bg-[#ff9999] rounded-lg px-2 ">
-                    50%
+                    {product.category === "electronics" ? "60" : "50"}%
                   </div>
                   <div className="line-through text-slate-400 text-xl ">
                     ${product?.price * 2}

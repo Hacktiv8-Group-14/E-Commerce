@@ -16,7 +16,7 @@ export default function SideBar({ className }) {
 
   const navActive = ({ isActive }) => {
     return {
-      backgroundColor: isActive ? "#242582" : "",
+      backgroundColor: isActive ? "#0a213a" : "",
       color: isActive ? "white" : "",
     };
   };
@@ -74,7 +74,7 @@ export default function SideBar({ className }) {
           </NavLink>
           <Button
             onClick={Logout}
-            className="border-y py-5 mt-24 hover:bg-[#242582] hover:text-white transition"
+            className="border-y py-5 mt-24 hover:bg-bluedark hover:text-white transition"
           >
             <div className="flex items-center justify-center">
               <FiLogOut size={25} />

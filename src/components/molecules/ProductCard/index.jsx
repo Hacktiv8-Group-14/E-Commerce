@@ -28,19 +28,19 @@ export default function ProductCard(props) {
           {/* Product Detail */}
           <div className="mb-2">
             {/* Product Category */}
-            <p className="bg-[#242582] p-1 mt-2 text-xs sm:text-sm md:text-base text-white rounded-br-2xl ">
+            <p className="bg-bluedark p-1 pl-3 mt-2 text-xs sm:text-sm md:text-base text-white rounded-br-2xl ">
               {product?.category}
             </p>
 
             <div className="px-2">
               {/* Product Price */}
-              <div className="sm:text-lg  font-semibold my-2 text-[#242582] flex flex-col sm:flex-row sm:items-center">
+              <div className="sm:text-lg  font-semibold my-2 text-bluedark flex flex-wrap sm:flex-row sm:items-center">
                 <div className="line-through text-slate-400 text-base">
-                  ${product?.price * 2}
+                  ${Math.trunc(product.price) * 2}
                 </div>
                 <div>
-                  <div className="mr-2 md:mx-2 inline-block">
-                    US$ {product?.price}
+                  <div className="mx-1 md:mx-2 inline-block">
+                    US$ {Math.trunc(product.price)}
                   </div>
                   <div className="inline-block text-base text-[#a32929] bg-[#ff9999] rounded-lg px-2">
                     {product.category === "electronics" ? "60" : "50"}%
