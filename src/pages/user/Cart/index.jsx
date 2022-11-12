@@ -88,7 +88,7 @@ export default function Cart() {
             </RowContainer>
             {/* buat nampilin total harga yang dicheck sm tombol checkout */}
             <BottomBarContainer>
-              <div className="flex bg-[#242582] w-4/5 justify-between p-2 sm:p-4 rounded-t-lg items-center">
+              <div className="flex bg-bluedark w-4/5 justify-between p-2 sm:p-4 rounded-t-lg items-center">
                 <div className="text-base sm:text-xl">
                   Total: <b>US$ {totalPrice}</b>
                 </div>

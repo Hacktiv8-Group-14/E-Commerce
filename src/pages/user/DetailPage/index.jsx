@@ -21,7 +21,7 @@ export default function DetailPage() {
   const admin = useSelector((state) => state.login.admin);
   const userName = useSelector((state) => state.login.userName);
   const products = useSelector((state) => state.products.products);
-  const userCartItem = useSelector((state) => state.cart.items[userName])
+  const userCartItem = useSelector((state) => state.cart.items[userName]);
   const cartItem = userCartItem?.find((item) => item.id === Number(id));
   const product = products?.find((item) => item.id === Number(id));
 
@@ -65,7 +65,7 @@ export default function DetailPage() {
                     <div>{`(${product?.rating.count} review)`}</div>
                   </div>
                 </div>
-                <div className=" my-4 font-medium text-[#242582] text-3xl flex items-center">
+                <div className=" my-4 font-medium text-bluedark text-3xl flex items-center">
                   $ {product?.price}
                   <div className="mx-2 text-lg text-[#a32929] bg-[#ff9999] rounded-lg px-2 ">
                     50%
@@ -128,7 +128,7 @@ export default function DetailPage() {
                         />
                       ) : (
                         <Button
-                          className="bg-[#242582] text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
+                          className="bg-bluedark text-white p-1.5 sm:p-2 w-full sm:w-52 rounded-lg"
                           onClick={() => {
                             if (user) {
                               dispatch(

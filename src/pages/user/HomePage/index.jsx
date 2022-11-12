@@ -5,6 +5,7 @@ import ProductCard from "../../../components/molecules/ProductCard";
 import PageContainer from "../../../components/container/PageContainer";
 import CardContainer from "../../../components/container/CardContainer";
 import { Navigate } from "react-router-dom";
+import Poster from "./Parts/Poster/Poster";
 
 export default function Homepage() {
   const categories = useSelector((state) => state.products.categories);
@@ -24,10 +25,11 @@ export default function Homepage() {
   }, [category, products]);
 
   if (admin) {
-    return <Navigate to="/Dashboard" />
+    return <Navigate to="/Dashboard" />;
   } else {
     return (
       <PageContainer>
+        <Poster />
         <CategoryNav
           categories={categories}
           category={category}

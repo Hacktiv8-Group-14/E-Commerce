@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="p-4 border-t bg-white  dark:bg-gray-900">
       <div className="flex flex-wrap sm:justify-between sm:px-24 flex-col sm:flex-row ">
         <div className="w-44 pb-8">
-          <img src={logo} />
+          <img src={logo} alt="logo" />
         </div>
         <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
           <div>

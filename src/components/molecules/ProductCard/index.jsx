@@ -43,7 +43,7 @@ export default function ProductCard(props) {
                     US$ {product?.price}
                   </div>
                   <div className="inline-block text-base text-[#a32929] bg-[#ff9999] rounded-lg px-2">
-                    50%
+                    {product.category === "electronics" ? "60" : "50"}%
                   </div>
                 </div>
               </div>

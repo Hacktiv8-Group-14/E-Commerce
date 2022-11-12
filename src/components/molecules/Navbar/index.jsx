@@ -8,9 +8,11 @@ import UserProfile from "../../atoms/UserProfile";
 function Navbar() {
   const admin = useSelector((state) => state.login.admin);
   const userName = useSelector((state) => state.login.userName);
-  const cart = useSelector((state) => state.cart.items[userName])
+  const cart = useSelector((state) => state.cart.items[userName]);
   const user = useSelector((state) => state.login.user);
-  const savedProduct = useSelector((state) => state.saved.savedProducts[userName]);
+  const savedProduct = useSelector(
+    (state) => state.saved.savedProducts[userName]
+  );
 
   return (
     <nav className="w-full font-bold text-white bg-white flex justify-between items-center fixed z-10 top-0  border-b-2 px-2 sm:px-10">
