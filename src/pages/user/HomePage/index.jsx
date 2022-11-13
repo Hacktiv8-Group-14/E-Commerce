@@ -31,7 +31,6 @@ export default function Homepage() {
     return (
       <PageContainer>
         <Poster />
-
         <CategoryNav
           categories={categories}
           category={category}

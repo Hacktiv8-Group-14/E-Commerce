@@ -8,11 +8,11 @@ import Header from "../../../../../components/molecules/Header/index.";
 export default function Recomended() {
   const products = useSelector((state) => state.products.products);
   const userName = useSelector((state) => state.login.userName);
-  const [bestRating, setHightRating] = useState(products);
+  const [bestRating, setBestRating] = useState(products);
 
   useEffect(() => {
     const filter = () => {
-      setHightRating(
+      setBestRating(
         bestRating.slice().sort((a, b) => b.rating.rate - a.rating.rate)
       );
     };
