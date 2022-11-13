@@ -24,8 +24,6 @@ export default function Poster() {
     }
   };
 
-  console.log(index);
-
   return (
     <>
       <div className="flex relative">
