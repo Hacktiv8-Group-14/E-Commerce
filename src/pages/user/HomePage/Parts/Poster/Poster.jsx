@@ -1,7 +1,10 @@
 import { useState } from "react";
 import Button from "../../../../../components/atoms/Buttons";
 import { dataPoster } from "./dataPoster";
-import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from "react-icons/io";
 
 export default function Poster() {
   const [index, setIndex] = useState(0);
@@ -27,10 +30,10 @@ export default function Poster() {
     <>
       <div className="flex relative">
         <Button onClick={rightClick} className="absolute inset-y-0 right-0 m-2">
-          <AiOutlineRight className="bg-white rounded-full text-3xl hover:transition" />
+          <IoIosArrowDroprightCircle className="text-white/50 hover:text-white hover:text-5xl text-4xl" />
         </Button>
         <Button onClick={leftClick} className="absolute inset-y-0 left-0 m-2 ">
-          <AiOutlineLeft className="bg-white rounded-full text-3xl hover:transition" />
+          <IoIosArrowDropleftCircle className="text-white/50 hover:text-white hover:text-5xl text-4xl" />
         </Button>
         <img
           className="w-full rounded-xl"

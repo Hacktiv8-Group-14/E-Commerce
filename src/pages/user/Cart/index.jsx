@@ -41,6 +41,20 @@ export default function Cart() {
     setCheckedItems(cart?.filter((item) => item.isChecked));
   }, [cart]);
 
+  const formatDollar = (num) => {
+    var p = num.toFixed(2).split(".");
+    return (
+      p[0]
+        .split("")
+        .reverse()
+        .reduce(function (acc, num, i, orig) {
+          return num + (num !== "-" && i && !(i % 3) ? "," : "") + acc;
+        }, "") +
+      "." +
+      p[1]
+    );
+  };
+
   useEffect(() => {
     const setTotal = () => {
       let temp = 0;
@@ -50,7 +64,7 @@ export default function Cart() {
         ).price;
         temp += item.total * productPrice;
       });
-      setTotalPrice(temp);
+      setTotalPrice(formatDollar(temp));
     };
     setTotal();
   }, [checkedItems]);

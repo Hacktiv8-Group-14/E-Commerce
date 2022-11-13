@@ -21,6 +21,20 @@ export default function CardProduct({
     dispatch(changeStock({ id: id, stock: Number(stockValue) }));
   };
 
+  const formatDollar = (num) => {
+    var p = num.toFixed(2).split(".");
+    return (
+      p[0]
+        .split("")
+        .reverse()
+        .reduce(function (acc, num, i, orig) {
+          return num + (num !== "-" && i && !(i % 3) ? "," : "") + acc;
+        }, "") +
+      "." +
+      p[1]
+    );
+  };
+
   return (
     <>
       <div
@@ -35,7 +49,9 @@ export default function CardProduct({
           />
           <div className="flex flex-col sm:w-96">
             <div className="text-sm sm:text-xl line-clamp-1">{title}</div>
-            <div className="font-medium text-sm sm:text-xl">US$ {price}</div>
+            <div className="font-medium text-sm sm:text-xl">
+              US$ {formatDollar(price)}
+            </div>
             {typeof stock !== "undefined" && (
               <div className="text-red-700  text-xs sm:text-lg ">
                 Remaining stock: {stock}
@@ -69,7 +85,7 @@ export default function CardProduct({
                 {productSold} sold
               </div>
               <div className="text-sm sm:text-xl">
-                Total: <b>US$ {price * productSold}</b>
+                Total: <b>US$ {formatDollar(price * productSold)}</b>
               </div>
             </>
           )}

@@ -11,13 +11,27 @@ export default function RecapPage() {
   const [totalSold, setTotalSold] = useState(0);
   const admin = useSelector((state) => state.login.admin);
 
+  const formatDollar = (num) => {
+    var p = num.toFixed(2).split(".");
+    return (
+      p[0]
+        .split("")
+        .reverse()
+        .reduce(function (acc, num, i, orig) {
+          return num + (num !== "-" && i && !(i % 3) ? "," : "") + acc;
+        }, "") +
+      "." +
+      p[1]
+    );
+  };
+
   useEffect(() => {
     const setTotal = () => {
       let temp = 0;
       products.forEach((product) => {
         temp += product.productSold * product.price;
       });
-      setTotalSold(temp);
+      setTotalSold(formatDollar(temp));
     };
     setTotal();
   }, []);
