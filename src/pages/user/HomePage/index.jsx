@@ -34,8 +34,12 @@ export default function Homepage() {
     } else if (selects === "high to low") {
       let highPrice = items?.sort((a, b) => b.price - a.price);
       setFilteredProducts(highPrice);
+    } else {
+      // sort by default (id)
+      let sortById = items?.sort((a, b) => a.id - b.id)
+      setFilteredProducts(sortById)
     }
-  }, [filteredProducts, selects]);
+  }, [selects]);
 
   if (admin) {
     return <Navigate to="/Dashboard" />;
