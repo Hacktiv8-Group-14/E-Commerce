@@ -27,11 +27,17 @@ export default function Poster() {
   return (
     <>
       <div className="flex relative">
-        <Button onClick={rightClick} className="absolute inset-y-0 right-0 m-2">
-          <IoIosArrowDroprightCircle className="text-white/50 hover:text-white hover:text-5xl text-4xl" />
+        <Button className="absolute inset-y-0 right-0 m-2 cursor-default">
+          <IoIosArrowDroprightCircle
+            onClick={rightClick}
+            className="text-white/50 hover:text-white hover:text-5xl text-4xl cursor-pointer"
+          />
         </Button>
-        <Button onClick={leftClick} className="absolute inset-y-0 left-0 m-2 ">
-          <IoIosArrowDropleftCircle className="text-white/50 hover:text-white hover:text-5xl text-4xl" />
+        <Button className="absolute inset-y-0 left-0 m-2 cursor-default">
+          <IoIosArrowDropleftCircle
+            onClick={leftClick}
+            className="text-white/50 hover:text-white hover:text-5xl text-4xl cursor-pointer"
+          />
         </Button>
         <img
           className="w-full rounded-xl"

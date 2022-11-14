@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import CategoryNav from "../../../components/molecules/CategoryNav";
+import CategoryNav from "./Parts/CategoryNav";
 import ProductCard from "../../../components/molecules/ProductCard";
 import PageContainer from "../../../components/container/PageContainer";
 import CardContainer from "../../../components/container/CardContainer";
@@ -15,15 +15,27 @@ export default function Homepage() {
 
   const [category, setCategory] = useState("all category");
   const [filteredProducts, setFilteredProducts] = useState(products);
+  const [selects, setSelects] = useState("");
+  const items = [...filteredProducts];
 
   useEffect(() => {
     if (category === "all category") {
       setFilteredProducts(products);
     } else {
-      let filter = products.filter((product) => product.category === category);
+      let filter = products?.filter((product) => product.category === category);
       setFilteredProducts(filter);
     }
   }, [category, products]);
+
+  useEffect(() => {
+    if (selects === "low to high") {
+      let lowPrice = items?.sort((a, b) => a.price - b.price);
+      setFilteredProducts(lowPrice);
+    } else if (selects === "high to low") {
+      let highPrice = items?.sort((a, b) => b.price - a.price);
+      setFilteredProducts(highPrice);
+    }
+  }, [filteredProducts, selects]);
 
   if (admin) {
     return <Navigate to="/Dashboard" />;
@@ -35,6 +47,8 @@ export default function Homepage() {
           categories={categories}
           category={category}
           setCategory={setCategory}
+          selects={selects}
+          setSelects={setSelects}
         />
         <CardContainer>
           {filteredProducts?.map((product) => (

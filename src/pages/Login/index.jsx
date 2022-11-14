@@ -113,17 +113,22 @@ export default function Login() {
                     name="password"
                     type={typePassword}
                     placeholder="Password"
-                    className="block  w-full px-3 py-1.5 text-base font-normal  mt-4 text-gray-700 bg-white  border border-solid border-gray-300 rounded"
+                    className="block w-full px-3 py-1.5 text-base font-normal  mt-4 text-gray-700 bg-white  border border-solid border-gray-300 rounded"
                     onChange={handleOnChange}
                     value={userValue.password}
                   />
-                  <div className="absolute top-3 right-5 cursor-pointer">
-                    {typePassword === "password" ? (
-                      <AiOutlineEyeInvisible onClick={showPW} />
-                    ) : (
-                      <AiOutlineEye onClick={showPW} />
-                    )}
-                  </div>
+
+                  {userValue.password === "" ? (
+                    <></>
+                  ) : (
+                    <div className="absolute top-3 right-5 cursor-pointer">
+                      {typePassword === "password" ? (
+                        <AiOutlineEyeInvisible onClick={showPW} />
+                      ) : (
+                        <AiOutlineEye onClick={showPW} />
+                      )}
+                    </div>
+                  )}
                 </div>
                 <Buttton
                   className="bg-bluedark disabled:bg-bluedark/50 w-full text-white p-2 mt-4 rounded"
