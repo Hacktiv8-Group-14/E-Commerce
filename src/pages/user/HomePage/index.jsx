@@ -34,10 +34,13 @@ export default function Homepage() {
     } else if (selects === "high to low") {
       let highPrice = items?.sort((a, b) => b.price - a.price);
       setFilteredProducts(highPrice);
+    } else if (selects === "most sales") {
+      let productSold = items?.sort((a, b) => b.productSold - a.productSold);
+      setFilteredProducts(productSold);
     } else {
       // sort by default (id)
-      let sortById = items?.sort((a, b) => a.id - b.id)
-      setFilteredProducts(sortById)
+      let sortById = items?.sort((a, b) => a.id - b.id);
+      setFilteredProducts(sortById);
     }
   }, [selects]);
 

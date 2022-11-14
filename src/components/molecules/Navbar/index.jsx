@@ -52,7 +52,7 @@ function Navbar() {
                   <Link to="/cart">
                     <AiOutlineShoppingCart
                       size={30}
-                      className="hover:text-[#242582] text-black"
+                      className="hover:text-bluedark text-black"
                     />
                   </Link>
                 </div>
@@ -64,7 +64,7 @@ function Navbar() {
             {/* Login/Logout Button */}
             {!user && !admin ? (
               <Link to="/login">
-                <Button className="border-[#242582] text-[#242582] border-2 rounded-lg px-5 py-1 text-base sm:text-lg  transition">
+                <Button className="border-bluedark text-bluedark border-2 rounded-lg px-5 py-1 text-base sm:text-lg  transition">
                   Login
                 </Button>
               </Link>

@@ -8,7 +8,9 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser, setUserName, setAdmin } from "../../features/loginSlice";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { FiLock, FiUser } from "react-icons/fi";
 import { useEffect } from "react";
+
 export default function Login() {
   const admin = useSelector((state) => state.login.admin);
   const user = useSelector((state) => state.login.user);
@@ -99,29 +101,32 @@ export default function Login() {
                 <div className=" text-red-500 ml-1 mb-2 text-sm font-medium">
                   {errorMessage}
                 </div>
-                <Input
-                  name="username"
-                  type="text"
-                  placeholder="Username"
-                  className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white  border border-solid border-gray-300 rounded"
-                  onChange={handleOnChange}
-                  value={userValue.username}
-                />
+                <div className="relative">
+                  <Input
+                    name="username"
+                    type="text"
+                    placeholder="Username"
+                    className=" pl-10  block w-full  py-1.5 text-base font-normal text-gray-700 bg-white  border border-solid border-gray-300 rounded"
+                    onChange={handleOnChange}
+                    value={userValue.username}
+                  />
+                  <FiUser className="absolute top-3 left-3" />
+                </div>
 
                 <div className="relative">
                   <Input
                     name="password"
                     type={typePassword}
                     placeholder="Password"
-                    className="block w-full px-3 py-1.5 text-base font-normal  mt-4 text-gray-700 bg-white  border border-solid border-gray-300 rounded"
+                    className="px-10 w-full py-1.5 text-base font-normal  mt-4 text-gray-700 bg-white  border border-solid border-gray-300 rounded"
                     onChange={handleOnChange}
                     value={userValue.password}
                   />
-
+                  <FiLock className="absolute top-7 left-3" />
                   {userValue.password === "" ? (
                     <></>
                   ) : (
-                    <div className="absolute top-3 right-5 cursor-pointer">
+                    <div className="absolute top-7 right-5 cursor-pointer">
                       {typePassword === "password" ? (
                         <AiOutlineEyeInvisible onClick={showPW} />
                       ) : (

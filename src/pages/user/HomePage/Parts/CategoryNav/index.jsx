@@ -63,8 +63,9 @@ export default function CategoryNav({
           className="border px-3 p-2"
         >
           <option value="">Sort by</option>
-          <option value="low to high">Sort by: Price - Low to high</option>
-          <option value="high to low">Sort by: Price - High to low</option>
+          <option value="most sales">Sort by Most Sales</option>
+          <option value="low to high">Sort by Price - Low to high</option>
+          <option value="high to low">Sort by Price - High to low</option>
         </select>
       </div>
     </>
