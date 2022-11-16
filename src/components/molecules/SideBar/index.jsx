@@ -6,8 +6,9 @@ import { removeLogin } from "../../../features/loginSlice";
 import { useDispatch } from "react-redux";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { MdSystemUpdateAlt } from "react-icons/md";
-import { FaChartLine } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
+import { FaRegChartBar } from "react-icons/fa";
+
 import Swal from "sweetalert2";
 
 export default function SideBar({ className }) {
@@ -68,7 +69,7 @@ export default function SideBar({ className }) {
           </NavLink>
           <NavLink to="/Sales" className="border-y py-5 pl-4" style={navActive}>
             <div className="flex items-center">
-              <FaChartLine size={25} />
+              <FaRegChartBar size={25} />
               <div className="ml-4"> Sales Recap</div>
             </div>
           </NavLink>

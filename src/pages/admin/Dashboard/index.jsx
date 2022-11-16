@@ -1,7 +1,7 @@
 import AdminContainer from "../../../components/container/adminContainer";
 import CardSales from "../../../components/molecules/Admin/CardSales";
 import Breadcrumb from "../../../components/molecules/Breadcrumb";
-import { FaChartLine } from "react-icons/fa";
+import { FaRegChartBar } from "react-icons/fa";
 import { MdAttachMoney } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -14,6 +14,20 @@ export default function Dashboard() {
 
   const [totalSold, setTotalSold] = useState(0);
   const [productSold, setProductSold] = useState(0);
+
+  const formatDollar = (num) => {
+    var p = num.toFixed(2).split(".");
+    return (
+      p[0]
+        .split("")
+        .reverse()
+        .reduce(function (acc, num, i, orig) {
+          return num + (num !== "-" && i && !(i % 3) ? "," : "") + acc;
+        }, "") +
+      "." +
+      p[1]
+    );
+  };
 
   useEffect(() => {
     const productsSold = () => {
@@ -38,24 +52,41 @@ export default function Dashboard() {
     return (
       <>
         <AdminContainer>
-          <Breadcrumb list={[{ url: "/Dashboard", name: "Admin" }]} />
+          <Breadcrumb list={[{ url: "/Dashboard", name: "Dashboard" }]} />
           <div className="flex md:flex-row justify-between flex-col">
             <CardSales
-              className="sm:w-96"
-              title="Product Sold"
-              rating="55%"
+              title="Total Product Sold"
               total={`${productSold} Product Sold`}
-              icon={<FaChartLine color="white" size={30} />}
+              icon={<FaRegChartBar color="white" size={30} />}
             />
             <CardSales
-              className="sm:w-96"
-              title="Sales"
-              rating="55%"
-              total={`$ ${totalSold}`}
+              title="Financial Income"
+              total={`$ ${formatDollar(totalSold)}`}
               icon={<MdAttachMoney color="white" size={30} />}
             />
           </div>
-          <Graphic />
+          <div className="flex flex-col md:flex-row justify-between mt-5">
+            <Graphic />
+            <div className="w-full md:w-1/4 px-2 border rounded-lg">
+              <div className="text-center py-4">Most sales</div>
+              {productSold ? (
+                <>
+                  {products
+                    ?.filter((item) => item.productSold >= 1)
+                    .sort((a, b) => b.productSold - a.productSold)
+                    .slice(0, 7)
+                    .map((product) => (
+                      <div className="flex justify-between border rounded-lg p-2 my-2">
+                        <div className="truncate w-1/2">{product.title}</div>
+                        <div>{`${product.productSold} item sold`}</div>
+                      </div>
+                    ))}
+                </>
+              ) : (
+                <div className="text-center text-red-600">"No sales yet"</div>
+              )}
+            </div>
+          </div>
         </AdminContainer>
       </>
     );

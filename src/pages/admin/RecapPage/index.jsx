@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import Breadcrumb from "../../../components/molecules/Breadcrumb";
 import AdminContainer from "../../../components/container/adminContainer";
 import CardProduct from "../../../components/molecules/Admin/CardProduct";
+import { FaRegChartBar } from "react-icons/fa";
 
 export default function RecapPage() {
   const products = useSelector((state) => state.products.products);
@@ -45,7 +46,6 @@ export default function RecapPage() {
             { url: "/Sales", name: "Sales Recap" },
           ]}
         />
-        <div></div>
         {products?.map((item, index) => (
           <CardProduct
             key={index}

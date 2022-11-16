@@ -61,14 +61,14 @@ export default function Graphic() {
       {
         label: "Products Sold",
         data: dataset.data2,
-        borderColor: "#242582",
+        borderColor: "#0a213a",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
   return (
-    <div id="graphic" className="w-full mb-10">
+    <div id="graphic" className="w-full md:w-3/4 p-3 border rounded-lg mr-3">
       <Line options={options} data={data} />
     </div>
   );
