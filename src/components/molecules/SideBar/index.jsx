@@ -46,7 +46,7 @@ export default function SideBar({ className, setIsSideBarOpen }) {
     <div className={className}>
       <div className="h-screen w-screen fixed top-0 z-10 bg-gray-600/50 md:hidden"></div>
       <div className="bg-white border fixed top-0 left-0 z-10 md:z-0 h-screen">
-        <div className="my-2 flex justify-between">
+        <div className="mt-3 mb-5 flex justify-between items-center">
           <Logo />
           <Button className="p-3 md:hidden" onClick={setIsSideBarOpen}>
             <AiOutlineClose className="text-2xl text-bluedark" />
