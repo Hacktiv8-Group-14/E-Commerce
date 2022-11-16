@@ -5,7 +5,7 @@ export default function Logo({ className }) {
   return (
     <>
       <Link to="/" className={className}>
-        <img src={logo} className="w-44" />
+        <img src={logo} className="w-44" alt="logo" />
       </Link>
     </>
   );

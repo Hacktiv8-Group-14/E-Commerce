@@ -47,8 +47,8 @@ export default function CardProduct({
             alt="product"
             className="h-12 sm:h-24 w-12 sm:w-24"
           />
-          <div className="flex flex-col sm:w-96">
-            <div className="text-sm sm:text-xl line-clamp-1">{title}</div>
+          <div className="flex flex-col md:w-full w-1/2  ">
+            <div className="text-sm sm:text-xl  line-clamp-1">{title}</div>
             <div className="font-medium text-sm sm:text-xl">
               US$ {formatDollar(price)}
             </div>
@@ -59,7 +59,7 @@ export default function CardProduct({
             )}
           </div>
         </div>
-        <div className="flex p-2 gap-2 md:gap-20">
+        <div className="flex  p-2 gap-2 md:gap-20">
           {typeof stock !== "undefined" && (
             <input
               type="number"
