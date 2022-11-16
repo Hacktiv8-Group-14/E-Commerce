@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { removeLogin } from "../../../features/loginSlice";
 import { useDispatch } from "react-redux";
-import { AiOutlineDashboard } from "react-icons/ai";
+import { AiOutlineDashboard, AiOutlineClose } from "react-icons/ai";
 import { MdSystemUpdateAlt } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { FaRegChartBar } from "react-icons/fa";
 
 import Swal from "sweetalert2";
 
-export default function SideBar({ className }) {
+export default function SideBar({ className, setIsSideBarOpen }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -44,8 +44,14 @@ export default function SideBar({ className }) {
 
   return (
     <div className={className}>
-      <div className="bg-white border fixed top-0  h-screen">
-        <Logo />
+      <div className="h-screen w-screen fixed top-0 z-10 bg-gray-600/50 md:hidden"></div>
+      <div className="bg-white border fixed top-0 left-0 z-10 md:z-0 h-screen">
+        <div className="my-2 flex justify-between">
+          <Logo />
+          <Button className="p-3 md:hidden" onClick={setIsSideBarOpen}>
+            <AiOutlineClose className="text-2xl text-bluedark" />
+          </Button>
+        </div>
         <div className=" justify flex flex-col w-72 h-full">
           <NavLink
             to="/Dashboard"
