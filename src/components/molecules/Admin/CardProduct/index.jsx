@@ -66,6 +66,14 @@ export default function CardProduct({
               className="border-2 text-center sm:text-lg w-10 sm:w-20 rounded-lg"
               value={stockValue}
               onChange={(event) => setStockValue(Number(event.target.value))}
+              onKeyDown={(event) => {
+                if(event.key === ','){
+                  event.preventDefault()
+                }
+              }}
+              onInput={(event) => {
+                event.target.value = event.target.value.replace(/[^0-9]*/g,'') // disable paste non-number
+              }}
             />
           )}
           {updButton && (
