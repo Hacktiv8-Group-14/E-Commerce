@@ -1,14 +1,13 @@
 import { useParams, useNavigate, Navigate } from "react-router-dom";
-import PageContainer from "../../../components/container/PageContainer";
 import { useSelector } from "react-redux";
-import Save from "../../../components/atoms/Save";
-import { AiFillStar } from "react-icons/ai";
-
-import Recomendation from "../../../components/molecules/Recomendation";
 import { useState } from "react";
-import Button from "../../../components/atoms/Buttons";
+import { AiFillStar } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { addCart, minCart } from "../../../features/cartSlice";
+import PageContainer from "../../../components/container/PageContainer";
+import Save from "../../../components/atoms/Save";
+import Recomendation from "../../../components/molecules/User/Recomendation";
+import Button from "../../../components/atoms/Buttons";
 import Quantity from "../../../components/atoms/Quantity";
 import Breadcrumb from "../../../components/molecules/Breadcrumb";
 

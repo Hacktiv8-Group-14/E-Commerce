@@ -6,11 +6,15 @@ export default function Error() {
     <PageContainer>
       <div className="flex justify-center my-48">
         <div className="text-center">
-          <div className="text-6xl">EROR 404 </div>
-          <div className="mb-4">PAGE NOT FOUND</div>
-          <Link to="/" className="bg-[#242582] p-2 rounded-lg text-white">
-            BACK TO HOME
-          </Link>
+          <div className="text-9xl font-bold">404 </div>
+          <div className="mb-4 text-sm mt-5">PAGE NOT FOUND</div>
+          <p>
+            we are sorry but the page you are looking for does not exist You
+            could return to{" "}
+            <Link to="/" className="text-red-600">
+              Homepage
+            </Link>
+          </p>
         </div>
       </div>
     </PageContainer>

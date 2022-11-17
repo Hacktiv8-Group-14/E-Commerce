@@ -1,5 +1,5 @@
-import Footer from "../../molecules/Footer";
-import Navbar from "../../molecules/Navbar";
+import Footer from "../../molecules/User/Footer";
+import Navbar from "../../molecules/User/Navbar";
 
 export default function PageContainer({ children }) {
   return (

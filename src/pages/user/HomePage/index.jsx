@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import CategoryNav from "./Parts/CategoryNav";
-import ProductCard from "../../../components/molecules/ProductCard";
+import ProductCard from "../../../components/molecules/User/ProductCard";
 import PageContainer from "../../../components/container/PageContainer";
 import CardContainer from "../../../components/container/CardContainer";
-import { Navigate } from "react-router-dom";
 import Poster from "./Parts/Poster/Poster";
 import Recomended from "./Parts/Recomended";
 

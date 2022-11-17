@@ -1,16 +1,18 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CardContainer from "../../../components/container/CardContainer";
 import PageContainer from "../../../components/container/PageContainer";
-import ProductCard from "../../../components/molecules/ProductCard";
-import { Link } from "react-router-dom";
+import ProductCard from "../../../components/molecules/User/ProductCard";
 import Breadcrumb from "../../../components/molecules/Breadcrumb";
 
 export default function SavedPage() {
   const products = useSelector((state) => state.products.products);
   const user = useSelector((state) => state.login.user);
   const username = useSelector((state) => state.login.userName);
-  const savedProduct = useSelector((state) => state.saved.savedProducts[username]);
+  const savedProduct = useSelector(
+    (state) => state.saved.savedProducts[username]
+  );
 
   let product = {};
 

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
-import Logo from "../../atoms/Logo";
-import Button from "../../atoms/Buttons";
 import { useSelector } from "react-redux";
-import UserProfile from "../../atoms/UserProfile";
+import Logo from "../../../atoms/Logo";
+import Button from "../../../atoms/Buttons";
+import UserProfile from "../../../atoms/UserProfile";
 
 function Navbar() {
   const admin = useSelector((state) => state.login.admin);

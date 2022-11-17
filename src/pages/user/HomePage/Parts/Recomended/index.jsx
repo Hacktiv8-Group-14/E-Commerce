@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import CardContainer from "../../../../../components/container/CardContainer";
-import ProductCard from "../../../../../components/molecules/ProductCard";
-import Header from "../../../../../components/molecules/Header/index.";
+import ProductCard from "../../../../../components/molecules/User/ProductCard";
+import Header from "../../../../../components/molecules/User/Header/index.";
 
 export default function Recomended() {
   const products = useSelector((state) => state.products.products);

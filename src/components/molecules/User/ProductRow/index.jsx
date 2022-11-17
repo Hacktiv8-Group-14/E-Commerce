@@ -1,4 +1,3 @@
-import Button from "../../atoms/Buttons";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -7,9 +6,10 @@ import {
   minCart,
   changeIsChecked,
   deleteItem,
-} from "../../../features/cartSlice";
+} from "../../../../features/cartSlice";
+import Button from "../../../atoms/Buttons";
 import Swal from "sweetalert2";
-import Quantity from "../../atoms/Quantity";
+import Quantity from "../../../atoms/Quantity";
 
 export default function ProductRow({
   id,
@@ -34,7 +34,7 @@ export default function ProductRow({
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes",
-        cancelButtonText: 'No'
+        cancelButtonText: "No",
       }).then((result) => {
         if (result.isConfirmed) {
           dispatch(minCart({ id: id, username: userName }));
@@ -90,7 +90,7 @@ export default function ProductRow({
             {/* nama produk */}
             <div className="text-sm sm:text-xl line-clamp-1">{title}</div>
             {/* harga produk */}
-            <div className="font-medium text-sm sm:text-xl">US$ {price}</div>
+            <div className="font-bold text-sm sm:text-xl">US$ {price}</div>
             <div className="text-red-700  text-xs sm:text-lg ">
               Remaining stock : {stock}
             </div>

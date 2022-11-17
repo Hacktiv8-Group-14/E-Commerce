@@ -1,6 +1,6 @@
 import PageContainer from "../../../components/container/PageContainer";
 import { RowContainer } from "../../../components/container/RowContainer";
-import ProductRow from "../../../components/molecules/ProductRow";
+import ProductRow from "../../../components/molecules/User/ProductRow";
 import { useState, useEffect } from "react";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";

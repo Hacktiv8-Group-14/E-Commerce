@@ -1,5 +1,6 @@
 import { BiCategory } from "react-icons/bi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function CategoryNav({
   category,
@@ -9,6 +10,19 @@ export default function CategoryNav({
   setSelects,
 }) {
   const [isCategoryExpanded, setIsCategoryExpanded] = useState(false);
+  const products = useSelector((state) => state.products.products);
+  const [productSold, setProductSold] = useState();
+
+  useEffect(() => {
+    const productsSold = () => {
+      let temp = 0;
+      products.forEach((product) => {
+        temp += product.productSold;
+      });
+      setProductSold(temp);
+    };
+    productsSold();
+  }, []);
 
   return (
     <>
@@ -63,7 +77,11 @@ export default function CategoryNav({
           className="border px-3 p-2"
         >
           <option value="">Sort by</option>
-          <option value="most sales">Sort by Most Sales</option>
+          {productSold > 0 ? (
+            <option value="most sales">Sort by Most Sales</option>
+          ) : (
+            <></>
+          )}
           <option value="low to high">Sort by Price - Low to high</option>
           <option value="high to low">Sort by Price - High to low</option>
         </select>
