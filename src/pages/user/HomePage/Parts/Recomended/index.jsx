@@ -6,9 +6,8 @@ import Header from "../../../../../components/molecules/User/Header/index.";
 export default function Recomended() {
   const products = useSelector((state) => state.products.products);
   const userName = useSelector((state) => state.login.userName);
-  const bestRating = products
-    ?.slice()
-    .sort((a, b) => b.rating.rate - a.rating.rate);
+  const product = [...products];
+  const bestRating = product.sort((a, b) => b.rating.rate - a.rating.rate);
 
   return (
     <div className="mt-4">

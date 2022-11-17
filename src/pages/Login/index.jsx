@@ -9,13 +9,14 @@ import { useDispatch } from "react-redux";
 import { setUser, setUserName, setAdmin } from "../../features/loginSlice";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { FiLock, FiUser } from "react-icons/fi";
-import { useEffect } from "react";
+import { useCallback } from "react";
 
 export default function Login() {
   const admin = useSelector((state) => state.login.admin);
   const user = useSelector((state) => state.login.user);
 
-  const [userValue, setUserValue] = useState({ username: "", password: "" });
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [typePassword, setTypePassword] = useState("password");
@@ -31,18 +32,14 @@ export default function Login() {
     }
   };
 
-  const handleOnChange = (e) => {
+  const handleOnChange = useCallback((e) => {
     const name = e.target.name;
     if (name === "username") {
-      setUserValue({ ...userValue, username: e.target.value });
+      setUsername(e.target.value);
     } else if (name === "password") {
-      setUserValue({ ...userValue, password: e.target.value });
+      setPassword(e.target.value);
     }
-  };
-
-  useEffect(() => {
-    console.log(userValue);
-  }, [userValue]);
+  });
 
   const isAdmin = () => {
     setTimeout(() => {
@@ -74,14 +71,11 @@ export default function Login() {
   const login = (e) => {
     setErrorMessage("");
     setLoading(true);
-    if (
-      userValue.username === "admin@bukapedia.com" &&
-      userValue.password === "admin123"
-    ) {
+    if (username === "admin@bukapedia.com" && password === "admin123") {
       isAdmin();
       e.preventDefault();
     } else {
-      isUser(userValue.username, userValue.password);
+      isUser(username, password);
       e.preventDefault();
     }
   };
@@ -108,7 +102,7 @@ export default function Login() {
                     placeholder="Username"
                     className=" pl-10  block w-full  py-1.5 text-base font-normal text-gray-700 bg-white  border border-solid border-gray-300 rounded"
                     onChange={handleOnChange}
-                    value={userValue.username}
+                    value={username}
                   />
                   <FiUser className="absolute top-3 left-3" />
                 </div>
@@ -120,10 +114,10 @@ export default function Login() {
                     placeholder="Password"
                     className="px-10 w-full py-1.5 text-base font-normal  mt-4 text-gray-700 bg-white  border border-solid border-gray-300 rounded"
                     onChange={handleOnChange}
-                    value={userValue.password}
+                    value={password}
                   />
                   <FiLock className="absolute top-7 left-3" />
-                  {userValue.password === "" ? (
+                  {password === "" ? (
                     <></>
                   ) : (
                     <div className="absolute top-7 right-5 cursor-pointer">
@@ -138,9 +132,7 @@ export default function Login() {
                 <Buttton
                   className="bg-bluedark disabled:bg-bluedark/50 w-full text-white p-2 mt-4 rounded"
                   onClick={login}
-                  disabled={
-                    loading || !userValue.username || !userValue.password
-                  }
+                  disabled={loading || !username || !password}
                 >
                   {loading ? "Logging in..." : "Login"}
                 </Buttton>

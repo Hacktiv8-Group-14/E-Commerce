@@ -8,7 +8,7 @@ import Logo from "../../../atoms/Logo";
 
 export default function Footer() {
   return (
-    <footer className="p-4 border-t bg-gray-900 ">
+    <footer className="p-4 border-t  ">
       <div className="flex flex-wrap sm:justify-between sm:px-24 flex-col sm:flex-row ">
         <div className="w-44 pb-8">
           <Logo />

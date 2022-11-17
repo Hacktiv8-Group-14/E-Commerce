@@ -1,11 +1,11 @@
-import DetailPage from "../pages/user/DetailPage";
-import Homepage from "../pages/user/HomePage";
+import DetailPage from "../pages/User/DetailPage";
+import Homepage from "../pages/User/HomePage";
 import Login from "../pages/Login";
-import Cart from "../pages/user/Cart";
-import SavedPage from "../pages/user/SavedPage";
-import RecapPage from "../pages/admin/RecapPage";
-import Dashboard from "../pages/admin/Dashboard";
-import StockUpdate from "../pages/admin/StockUpdate";
+import Cart from "../pages/User/Cart";
+import SavedPage from "../pages/User/SavedPage";
+import RecapPage from "../pages/Admin/RecapPage";
+import Dashboard from "../pages/Admin/Dashboard";
+import StockUpdate from "../pages/Admin/StockUpdate";
 import Error from "../pages/Error";
 
 export const routes = [
