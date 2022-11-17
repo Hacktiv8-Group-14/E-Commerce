@@ -1,7 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit'
 
+let dataStorage = localStorage.getItem("cart");
+
 const initialState = {
-    items: {},
+    items: JSON.parse(dataStorage) || {},
 }
 
 const cartSlice = createSlice({
@@ -36,6 +38,10 @@ const cartSlice = createSlice({
                     isChecked: false
                 }]
             }
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(state.items)
+            )
         },
         minCart: (state, action) => {
             state.items[action.payload.username].forEach(item => {
@@ -48,6 +54,10 @@ const cartSlice = createSlice({
             if(state.items[action.payload.username].length === 0) {
                 delete state.items[action.payload.username]
             }
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(state.items)
+            )
         },
         changeIsChecked: (state, action) => {
             state.items[action.payload.username].forEach((item) => {
@@ -55,6 +65,10 @@ const cartSlice = createSlice({
                     item.isChecked = !item.isChecked
                 }
             })
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(state.items)
+            )
         },
         deleteItem: (state, action) => {
             const filterCartItems = state.items[action.payload.username].filter((item) => item.id !== action.payload.id)
@@ -62,6 +76,10 @@ const cartSlice = createSlice({
             if(state.items[action.payload.username].length === 0) {
                 delete state.items[action.payload.username]
             }
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(state.items)
+            )
         },
     }
 })

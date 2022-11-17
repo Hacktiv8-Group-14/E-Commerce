@@ -9,10 +9,13 @@ import ScrollToTop from "./components/atoms/ScrollToTop";
 function App() {
   const dispatch = useDispatch();
   const isPending = useSelector((state) => state.products.isPending);
+  const products = useSelector((state) => state.products.products)
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    if(products.length === 0){
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, products]);
 
   return (
     <BrowserRouter>

@@ -1,12 +1,15 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 
+let dataStorage = localStorage.getItem("products");
+let categoriesStorage = localStorage.getItem("categories")
+
 const initialState = {
     isPending: false,
     isSuccess: false,
     errorMessage: '',
-    products: [],
-    categories: []
+    products: JSON.parse(dataStorage) || [],
+    categories: JSON.parse(categoriesStorage) || []
 }
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
@@ -31,6 +34,10 @@ const productSlice = createSlice({
                     product.stock -= action.payload.total
                 }
             })
+            localStorage.setItem(
+                "products",
+                JSON.stringify(state.products)
+            )
         },
         changeStock: (state, action) => {
             state.products.forEach((product) => {
@@ -38,6 +45,10 @@ const productSlice = createSlice({
                     product.stock = action.payload.stock
                 }
             })
+            localStorage.setItem(
+                "products",
+                JSON.stringify(state.products)
+            )
         }
     },
     extraReducers(builder){
@@ -64,6 +75,14 @@ const productSlice = createSlice({
             state.isPending = false
             state.loading = false
             state.errorMessage = ''
+            localStorage.setItem(
+                "products",
+                JSON.stringify(state.products)
+            )
+            localStorage.setItem(
+                "categories",
+                JSON.stringify(state.categories)
+            )
         })
     }
 })
